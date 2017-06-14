@@ -21,16 +21,21 @@ public class Incatch {
         } catch (Exception e) { }
         Framework framework = new Framework();
         framework.addButton();
+        int code = framework.run();
+        while(code<0){
+            framework.run();
+        }
+        
         //framework.addMap();
         
      }
      
     public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
+        //javax.swing.SwingUtilities.invokeLater(new Runnable() {
+          //  public void run() {
                 createAndShowGUI();
-            }
-        });
+            //}
+        //});
       
         
         

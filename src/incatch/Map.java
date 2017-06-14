@@ -6,14 +6,6 @@
 package incatch;
 
 import java.awt.geom.Point2D;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.Vector;
-import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import java.awt.image.BufferedImage;
 
@@ -83,5 +75,34 @@ public class Map extends JPanel {
         description+="br: (" + br.getX() +","+br.getY()+") ";
         
         return description;
+    }
+    public Point2D convert(Pose p){
+        Point2D t = p.getP();
+        Point2D z=new Point2D.Double(-1,-1);
+        t.getX();
+        int width = mapImage.getWidth ();
+        int height = mapImage.getHeight ();
+        double ulX=ul.getX();
+        double ulY=ul.getY();
+        double brX=br.getX();
+        double brY=br.getY();
+        double diffX=ulX-brX;
+        double diffY=brY-ulY;
+        double tY=t.getY();
+        double tX=t.getX();
+        double difftX=tX-ulX;
+        double difftY=tY-ulY;
+        double zX=(tX*width)/diffX;
+        double zY=(tY*height)/diffY;
+        z.setLocation(zX,zY);
+        System.out.println("puntoX: "+z.getX());
+        System.out.println("puntoY: "+z.getY());
+        System.out.println("X: "+diffX);
+        System.out.println("Y: "+diffY);
+        System.out.println("X: "+ulX);
+        System.out.println("Y: "+ulY);
+        System.out.println("X: "+brX);
+        System.out.println("Y: "+brY);
+    return z;
     }
 }

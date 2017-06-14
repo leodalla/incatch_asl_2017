@@ -30,7 +30,9 @@ public class Pose {
         s += (q+"," + zone +")");
         return s;
     }
-    
+    public Point2D getP(){
+        return p;
+    }
 }
    
    

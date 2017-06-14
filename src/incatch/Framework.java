@@ -29,6 +29,7 @@ public class Framework extends JPanel implements ActionListener{
     private JFrame frame;
     private JButton playButton, stopButton, nextButton , mapButton,logButton ;
     private JPanel buttonPanel;
+    private String mappa;
     
     public Framework(){
        
@@ -131,6 +132,18 @@ public class Framework extends JPanel implements ActionListener{
         if (n == JFileChooser.APPROVE_OPTION) {
         File f = fileChooser.getSelectedFile();
         System.out.println("name: "+f);
+        mappa=f.toString();
+        
+        int index=mappa.indexOf(".");
+        if(index<0)
+        {
+            System.err.println("Errore logfile non trovo .");
+            System.exit(-1);
+        }
+        mappa= mappa.substring(0,index);
+        
+        Map map = new Map(mappa);
+        
         
         mapIcon=new ImageIcon(f.toString());
         //LA DIRECTORY FUNZOINA F NOOOOOOOO

@@ -1,0 +1,11 @@
+# progetto Inctach file di configurazione
+#[map] dati/map.png
+#ul=upper left 
+#dr=down right
+
+ul	45,359519
+ul1	11,019895
+
+dl	45,358987
+dl1	11,021704	
+

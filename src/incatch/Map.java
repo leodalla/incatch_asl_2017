@@ -78,12 +78,13 @@ public class Map extends JPanel {
     
     public void parse(String riga)
     {
-        int index=riga.indexOf("I");
-        if(index<0)
+        int index=riga.indexOf("#");
+        if(index==0)
         {
-            System.err.println("Errore logfile non trovo I");
-            System.exit(-1);
+            System.out.println("Riga Commento");
         }
+        else
+        {
         String ss= riga.substring(0,index);
         //System.out.println("ss " +ss);
         long timestamp=Long.valueOf(ss.trim()).longValue();
@@ -112,6 +113,7 @@ public class Map extends JPanel {
 
             String z= temp.substring(temp.indexOf("z")+7,temp.indexOf("\"}"));
             System.out.println("z: "+z);
+        }
         }
     }
     

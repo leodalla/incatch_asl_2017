@@ -142,6 +142,8 @@ public class Framework extends JPanel implements ActionListener{
         }
         mappa= mappa.substring(0,index);
         
+        
+        
         Map map = new Map(mappa);
         
         

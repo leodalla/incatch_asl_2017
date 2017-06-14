@@ -29,7 +29,7 @@ public class Framework extends JPanel implements ActionListener{
     private JFrame frame;
     private JButton playButton, stopButton, nextButton , mapButton,logButton ;
     private JPanel buttonPanel;
-    private String mappa;
+    private String mapname;
     
     public Framework(){
        
@@ -127,23 +127,18 @@ public class Framework extends JPanel implements ActionListener{
         
         try {
         
-        JFileChooser fileChooser = new JFileChooser();
+        JFileChooser fileChooser = new JFileChooser("./dati");
         int n = fileChooser.showOpenDialog(Framework.this);
         if (n == JFileChooser.APPROVE_OPTION) {
         File f = fileChooser.getSelectedFile();
         System.out.println("name: "+f);
-        mappa=f.toString();
+        mapname=f.toString();
         
-        int index=mappa.indexOf(".");
-        if(index<0)
-        {
-            System.err.println("Errore logfile non trovo .");
-            System.exit(-1);
-        }
-        mappa= mappa.substring(0,index);
+        MapReader mr = new MapReader(mapname);
+        Map map = mr.getMap();
         
-        Map map = new Map(mappa);
-        
+        System.out.println("***");
+        System.out.println(map.toString());
         
         mapIcon=new ImageIcon(f.toString());
         //LA DIRECTORY FUNZOINA F NOOOOOOOO

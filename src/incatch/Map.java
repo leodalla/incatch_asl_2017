@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.Vector;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -22,99 +23,65 @@ import javax.swing.JPanel;
  */
 public class Map extends JPanel {
     
-    private String nomeconfig;
-    private File fileconfig;
-    
-    public Map(String n)
-    {
-        nomeconfig=n;
-        nomeconfig=nomeconfig.concat("config.txt");
-        System.out.println("fileconfig: "+ nomeconfig);
-  
-    }
-   
-        public boolean read()
-    {
-        System.out.println("sto per leggere il file "+nomeconfig);
-        FileReader f;
-        try  {
-            
-            f=new FileReader(nomeconfig);
-        }
-        
-        catch (FileNotFoundException e) {
-            System.err.println("non trovo il file " +nomeconfig);
-            return false;
-        }
+    private Point2D ul,br;
+    private BufferedImage mapImage;
 
-        BufferedReader b;
-        
-        b=new BufferedReader(f);
-        
-            String riga="";
-
-            while(true) {
-            try{
-              riga=b.readLine();
-              
-            }
-            
-            catch (IOException e){
-            e.printStackTrace();
-            return false;
-            }
-            
-              if(riga==null)
-                break;
-              parse(riga);
-              System.out.println("riga "+riga);
-              //long ts= getTimestamp();
-              //v.addElement(ts);     
-        }
-        
-        return true;
-        
+    public Map()
+    {
+        mapImage= null;
+        this.ul=null;
+        this.br=null;  
     }
     
-    public void parse(String riga)
+    public Map(BufferedImage img, Point2D ul, Point2D br)
     {
-        int index=riga.indexOf("#");
-        if(index==0)
-        {
-            System.out.println("Riga Commento");
-        }
-        else
-        {
-        String ss= riga.substring(0,index);
-        //System.out.println("ss " +ss);
-        long timestamp=Long.valueOf(ss.trim()).longValue();
-        
-        int index2=riga.indexOf("pose");
-        if(index2>0)
-        {
-        
-            String sp= riga.substring(index2+6);
-            System.out.println("sp: "+sp);
-            String x= sp.substring(sp.indexOf("p")+4, sp.indexOf(","));
-                    System.out.println("x: "+x);
-            String temp=sp.substring(sp.indexOf(",")+1);
-            String y= temp.substring(0, temp.indexOf(","));
-            System.out.println("y: "+y);
-
-            double xd=Double.valueOf(x);
-            System.out.println("xd: "+xd);
-            double yd=Double.valueOf(y);
-            System.out.println("yd: "+yd);
-            Point2D p= new Point2D.Double(xd,yd);
-
-            String q= temp.substring(temp.indexOf("q")+4, temp.indexOf("z")-3);
-
-            System.out.println("q: "+q);
-
-            String z= temp.substring(temp.indexOf("z")+7,temp.indexOf("\"}"));
-            System.out.println("z: "+z);
-        }
-        }
+        mapImage= img;
+        this.ul=ul;
+        this.br=br;  
     }
     
+    public void setMapImage(BufferedImage img){
+        
+        mapImage= img;
+    }
+    
+    public void setUl(Point2D ul){
+        
+        this.ul=ul;
+         System.out.println("OK: ");
+    }
+    
+    public void setBr(Point2D br){
+        
+        this.br=br;
+    }
+    
+    public Point2D getUl()
+    {
+        return ul;
+    }
+    
+    public Point2D getBr()
+    {
+        return br;
+    }
+    
+    public BufferedImage getMapImage()
+    {
+        return mapImage;
+    }
+    
+    public String toString(){
+            
+            
+        System.out.println("dentrotoString");
+        
+        String description="";
+        
+        description+="map: (" + mapImage.getWidth() +","+mapImage.getHeight()+") ";
+        description+="ul: (" + ul.getX() +","+ul.getY()+") ";
+        description+="br: (" + br.getX() +","+br.getY()+") ";
+        
+        return description;
+    }
 }

@@ -79,30 +79,33 @@ public class Map extends JPanel {
     public Point2D convert(Pose p){
         Point2D t = p.getP();
         Point2D z=new Point2D.Double(-1,-1);
-        t.getX();
         int width = mapImage.getWidth ();
         int height = mapImage.getHeight ();
-        double ulX=ul.getX();
-        double ulY=ul.getY();
-        double brX=br.getX();
-        double brY=br.getY();
-        double diffX=ulX-brX;
-        double diffY=brY-ulY;
-        double tY=t.getY();
-        double tX=t.getX();
-        double difftX=tX-ulX;
-        double difftY=tY-ulY;
-        double zX=(tX*width)/diffX;
-        double zY=(tY*height)/diffY;
-        z.setLocation(zX,zY);
+        System.out.println("w: "+width);
+        System.out.println("h: "+height);
+        
+        double t_x=t.getX();
+        System.out.println("tx: "+t_x);
+        double ul_x=ul.getX();
+        System.out.println("ulX: "+ul_x);
+        double br_x=br.getX();
+        System.out.println("brX: "+br_x);
+        double x = ((t_x-ul_x)*width)/(br_x-ul_x);
+        System.out.println("X: "+x);
+        double t_y=t.getY();
+        System.out.println("ty: "+t_y);
+        
+        double ul_y=ul.getY();
+        
+        double br_y=br.getY();
+        
+        double y=((t_y-ul_y)*height)/(br_y-ul_y);
+        System.out.println("y: "+y);
+        
+        z.setLocation(x,y);
         System.out.println("puntoX: "+z.getX());
         System.out.println("puntoY: "+z.getY());
-        System.out.println("X: "+diffX);
-        System.out.println("Y: "+diffY);
-        System.out.println("X: "+ulX);
-        System.out.println("Y: "+ulY);
-        System.out.println("X: "+brX);
-        System.out.println("Y: "+brY);
+        
     return z;
     }
 }

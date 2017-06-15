@@ -4,7 +4,6 @@ package incatch;
 import java.util.Vector;
 import java.util.*;
 import javax.swing.*;
-
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -27,10 +26,9 @@ public class Incatch {
         }
         
         //framework.addMap();
-        
-     }
+    }
      
-    public static void main(String[] args) {
+    public static void main(String[] args){
         //javax.swing.SwingUtilities.invokeLater(new Runnable() {
           //  public void run() {
                 createAndShowGUI();
@@ -63,9 +61,5 @@ public class Incatch {
            System.out.println(p.toString());
         }
         */
-     
     }
-   
-    
- 
 }

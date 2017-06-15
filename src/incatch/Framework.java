@@ -140,14 +140,14 @@ public class Framework extends JPanel implements ActionListener{
             
              Graphics2D g2d = mapImage.createGraphics();
               
-             g2d.setColor(Color.BLACK);
+             g2d.setColor(Color.RED);
               
              Iterator<Pose> it= log.iterator();
         
              while(it.hasNext()){
                 Pose p= it.next();
                 Point2D puntoImmagine=map.convert(p);
-                g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 10, 10);
+                g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 5, 5);
              }
          
           frame.revalidate();

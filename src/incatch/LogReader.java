@@ -19,15 +19,15 @@ public class LogReader {
         v= new Vector();
   
     }
+    
     public boolean read()
     {
         System.out.println("sto per leggere il file "+nomefile);
         FileReader f;
-        try  {
+        try{
             
             f=new FileReader(nomefile);
         }
-        
         catch (FileNotFoundException e) {
             System.err.println("non trovo il file " +nomefile);
             return false;
@@ -36,33 +36,27 @@ public class LogReader {
         BufferedReader b;
         
         b=new BufferedReader(f);
-        
-        
-        
-        
-            String riga="";
+        String riga="";
 
-            while(true) {
+        while(true){
             try{
               riga=b.readLine();
               
             }
-            
             catch (IOException e){
             e.printStackTrace();
             return false;
             }
             
-              if(riga==null)
-                break;
-              parse(riga);
-              System.out.println("riga "+riga);
-              //long ts= getTimestamp();
-              //v.addElement(ts);     
+            if(riga==null)
+            break;
+            parse(riga);
+            System.out.println("riga "+riga);
+            //long ts= getTimestamp();
+            //v.addElement(ts);     
         }
         
         return true;
-        
     }
     
     public void parse(String riga)
@@ -80,11 +74,10 @@ public class LogReader {
         int index2=riga.indexOf("pose");
         if(index2>0)
         {
-        
             String sp= riga.substring(index2+6);
             System.out.println("sp: "+sp);
             String x= sp.substring(sp.indexOf("p")+4, sp.indexOf(","));
-                    System.out.println("x: "+x);
+            System.out.println("x: "+x);
             String temp=sp.substring(sp.indexOf(",")+1);
             String y= temp.substring(0, temp.indexOf(","));
             System.out.println("y: "+y);
@@ -112,9 +105,5 @@ public class LogReader {
     public Vector<Pose> getVector()
     {
         return v;
-    }
-    
-    
-    
-}   
-
+    }   
+}

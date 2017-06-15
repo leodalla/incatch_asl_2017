@@ -40,19 +40,16 @@ public class MapReader {
         System.out.println("file di configurazione: "+ cfgname);
         readCfg();
         loadMap();
-        
-  
     }
    
     public boolean readCfg()
     {
         System.out.println("sto per leggere il file "+cfgname);
         FileReader f;
-        try  {
+        try{
             
             f=new FileReader(cfgname);
         }
-        
         catch (FileNotFoundException e) {
             System.err.println("non trovo il file " +cfgname);
             return false;
@@ -60,14 +57,12 @@ public class MapReader {
         
         br=new BufferedReader(f);
         
-            String riga="";
+        String riga="";
 
-            while(true) {
+        while(true) {
             try{
               riga=br.readLine();
-              
             }
-            
             catch (IOException e){
             e.printStackTrace();
             return false;
@@ -82,7 +77,6 @@ public class MapReader {
         }
         
         return true;
-        
     }
     
     public void parse(String riga)
@@ -135,7 +129,7 @@ public class MapReader {
             System.out.println("n: " + n);
             System.out.println("e: " + e);
             
-            Point2D ul= new Point2D.Double(n, e);
+            Point2D ul= new Point2D.Double(e, n);
             
             System.out.println("ul: " + ul.toString());
             map.setUl(ul);
@@ -176,7 +170,7 @@ public class MapReader {
             System.out.println("n: " + n);
             System.out.println("e: " + e);
             
-            Point2D btmr= new Point2D.Double(n, e);
+            Point2D btmr= new Point2D.Double(e, n);
             
             System.out.println("btmr: " + btmr.toString());
             map.setBr(btmr);
@@ -231,8 +225,7 @@ public class MapReader {
         BufferedImage img = null;
         try {
             img = ImageIO.read(new File(mapname));
-         } catch (IOException e) {
-         }
+         } catch (IOException e) {}
         
         map.setMapImage(img);
             int w=map.getMapImage().getWidth();

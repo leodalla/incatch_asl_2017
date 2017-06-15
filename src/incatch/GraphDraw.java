@@ -56,13 +56,15 @@ public class GraphDraw extends JFrame {
     
     public void paint(Graphics g) { // draw the nodes and edges
 	
+        double OFFSET = 20;
+        
 	g.setColor(Color.red);
 	for (Edge e : edges) {
             
-            int xi = (int)(nodes.get(e.getI()).x*1.5);
-            int yi = (int)(nodes.get(e.getI()).y*1.5);
-            int xj = (int)(nodes.get(e.getJ()).x*1.5);
-            int yj = (int)(nodes.get(e.getJ()).y*1.5);
+            int xi = (int)(nodes.get(e.getI()).x*OFFSET);
+            int yi = (int)(nodes.get(e.getI()).y*OFFSET);
+            int xj = (int)(nodes.get(e.getJ()).x*OFFSET);
+            int yj = (int)(nodes.get(e.getJ()).y*OFFSET);
             
             /*
             System.out.println("xi: " + xi);
@@ -70,29 +72,35 @@ public class GraphDraw extends JFrame {
             System.out.println("xj: " + xj);
             System.out.println("yj: " + yj);
             */
-            double theta = Math.PI/2;    
+            
+            
+            //double theta = Math.PI/2;    
         
-            int xip = (int)(Math.cos(theta) * xi - Math.sin(theta) * yi);
-            int yip = (int)(Math.sin(theta) * xi + Math.cos(theta) * yi);
+            int xip = xi; 
+                    //(int)(Math.cos(theta) * xi - Math.sin(theta) * yi);
+            int yip = yi;
+                    //(int)(Math.sin(theta) * xi + Math.cos(theta) * yi);
             
-            xip += 700;
-            yip -= 200;
+            xip -= 8000;
+            yip -= 6700;
             
-            /*
+            
             System.out.println("xip: " + xip);
             System.out.println("yip: " + yip);
-            */
             
-            int xjp = (int)(Math.cos(theta) * xj - Math.sin(theta) * yj);
-            int yjp = (int)(Math.sin(theta) * xj + Math.cos(theta) * yj);
             
-            xjp += 700;
-            yjp -= 200;
+            int xjp = xj;
+                    //(int)(Math.cos(theta) * xj - Math.sin(theta) * yj);
+            int yjp = yj;
+                    //(int)(Math.sin(theta) * xj + Math.cos(theta) * yj);
             
-            /*
+            xjp -= 8000;
+            yjp -= 6700;
+            
+            
             System.out.println("xjp: " + xjp);
             System.out.println("yjp: " + yjp);
-            */
+            
             
 	    g.drawLine(xip, yip, xjp, yjp);
 	}
@@ -101,16 +109,18 @@ public class GraphDraw extends JFrame {
 	    
             g.setColor(Color.black);
             
-            int x = (int)(n.x*1.5);
-            int y = (int)(n.y*1.5);
+            int x = (int)(n.x*OFFSET);
+            int y = (int)(n.y*OFFSET);
             
-            double theta = Math.PI/2;    
+            //double theta = Math.PI/2;    
         
-            int xp = (int)(Math.cos(theta) * x - Math.sin(theta) * y);
-            int yp = (int)(Math.sin(theta) * x + Math.cos(theta) * y);
+            int xp = x;
+                    //(int)(Math.cos(theta) * x - Math.sin(theta) * y);
+            int yp = y;
+                    //(int)(Math.sin(theta) * x + Math.cos(theta) * y);
             
-            xp += 700;
-            yp -= 200;
+            xp -= 8000;
+            yp -= 6700;
             
             g.fillOval(xp, yp, 3, 3);
 	    

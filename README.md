@@ -3,5 +3,5 @@
 - Autori Bottaro Carlo, Dalla Riva Leonardo e Bloisi Domenico
 - Liceo Scientifico Statale opzione scienze applicate  "Galileo Galilei"
 
-![GitHub Logo](/images/logoGG.png)
+![Galileo Galilei Logo](/images/logoGG.png)
  

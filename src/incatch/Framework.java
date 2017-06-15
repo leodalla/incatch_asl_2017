@@ -104,7 +104,7 @@ public class Framework extends JPanel implements ActionListener{
                     }
          }      
          
-         if(actions==1){
+        if(actions==1){
             //condizione valida se il log non viene caricato
             if(log==null){
                 String message = "selezionare un log prima di premere play.";
@@ -113,33 +113,27 @@ public class Framework extends JPanel implements ActionListener{
                 actions=0;
                 playButton.setEnabled(true);
                 return(-1);
-                 }            
-             System.out.println("log:" +log.size());
-             Graphics2D g2d = mapImage.createGraphics();
-<<<<<<< HEAD
+            }            
+            System.out.println("log:" +log.size());
+            Graphics2D g2d = mapImage.createGraphics();
+
               
-             g2d.setColor(Color.BLACK);
+            g2d.setColor(Color.BLACK);
               
-             Iterator<Pose> it= log.iterator();
+            Iterator<Pose> it= log.iterator();
         
-             while(it.hasNext()){
+            while(it.hasNext()){
                 Pose p= it.next();
                 Point2D puntoImmagine=map.convert(p);
                 g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 5, 5);
-=======
-             g2d.setColor(Color.BLACK);              
-             Iterator<Pose> it= log.iterator();       
-             while(it.hasNext()){
-                 Pose p= it.next();
-                 Point2D puntoImmagine=map.convert(p);
-                 g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 10, 10);
-                 }        
-                     frame.revalidate();
-                     frame.repaint();
->>>>>>> 7437c1d6dd4f0382f20e17e48d4414d654ea09e4
-             }
-         return 0;
-         }
+
+            g2d.setColor(Color.BLACK); 
+            }        
+            frame.revalidate();
+            frame.repaint();
+        }
+        return 0;
+    }
     
     public void actionPerformed(ActionEvent e) {
               String command= e.getActionCommand();

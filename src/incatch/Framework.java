@@ -112,64 +112,25 @@ public class Framework extends JPanel implements ActionListener{
                 actions=0;
                 playButton.setEnabled(true);
                 return(-1);
-<<<<<<< Updated upstream
-
             }            
-            System.out.println("log:" +log.size());
-            
-        }            
-        Graphics2D g2d = mapImage.createGraphics();
-        Iterator<Pose> it= log.iterator();
-        
-        while(it.hasNext()){
-            Pose p= it.next();
-            Point2D puntoImmagine=map.convert(p);
-            g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 5, 5);
-=======
-<<<<<<< Updated upstream
-            }            
-            System.out.println("log:" +log.size());
+            //System.out.println("log:" +log.size());
+               
             Graphics2D g2d = mapImage.createGraphics();
-=======
-                 }            
-             //System.out.println("log:" +log.size());
-             Graphics2D g2d = mapImage.createGraphics();
->>>>>>> Stashed changes
-
-              
-            g2d.setColor(Color.BLACK);
-              
-            Iterator<Pose> it= log.iterator();
-        
-            while(it.hasNext()){
-                Pose p= it.next();
-                Point2D puntoImmagine=map.convert(p);
-                g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 5, 5);
-
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
             g2d.setColor(Color.BLACK); 
+            
+            Iterator<Pose> it= log.iterator();         
+            while(it.hasNext()){
+                Pose p = it.next();
+                Point2D puntoImmagine = map.convert(p);
+                g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 5, 5);
+            }
+            
+            frame.revalidate();
+            frame.repaint();
         }        
-        frame.revalidate();
-        frame.repaint();
-        
+                
         return 0;
     }
-=======
-             g2d.setColor(Color.BLACK);              
-             Iterator<Pose> it= log.iterator();       
-             while(it.hasNext()){
-                 Pose p= it.next();
-                 Point2D puntoImmagine=map.convert(p);
-                 g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 10, 10);
-                 }        
-                     frame.revalidate();
-                     frame.repaint();
-
-             }
-         return 0;
-         }
->>>>>>> Stashed changes
     
     public void actionPerformed(ActionEvent e) {
               String command= e.getActionCommand();

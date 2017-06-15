@@ -106,11 +106,8 @@ public class Map extends JPanel {
         z.setLocation(x,y);
         System.out.println("puntoX: "+z.getX());
         System.out.println("puntoY: "+z.getY());
-<<<<<<< Updated upstream
+
 
         return z;
-=======
-    return z;
->>>>>>> Stashed changes
     }
 }

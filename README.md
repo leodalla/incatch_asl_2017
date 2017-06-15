@@ -7,3 +7,9 @@
 ![Univr Logo](/images/logoUnivr.png) ![Galileo Galilei Logo](/images/logoGG.png)
 
 ![Intcatch Boat](/images/intcatchBoat.jpg)
+
+## Attività svolte:
+
+1. Presentazione del drone acquatico
+1. Scrittura, compilazione ed esecuzione di un programma in JAVA
+  1. Acquisizione e analisi dati reali

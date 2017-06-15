@@ -114,20 +114,30 @@ public class Framework extends JPanel implements ActionListener{
                 return(-1);
             }            
             //System.out.println("log:" +log.size());
-               
-            Graphics2D g2d = mapImage.createGraphics();
-            g2d.setColor(Color.BLACK); 
+            do
+            {
+                Graphics2D g2d = mapImage.createGraphics();
+                g2d.setColor(Color.BLACK); 
+
+
+                Iterator<Pose> it= log.iterator();
+                while(it.hasNext()){
+                    Pose p = it.next();
+                    Point2D puntoImmagine = map.convert(p);
+                    g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 5, 5);
+                    frame.revalidate();
+                    frame.repaint();
+                }
+                
+            }while(actions==1);
             
-            Iterator<Pose> it= log.iterator();         
-            while(it.hasNext()){
-                Pose p = it.next();
-                Point2D puntoImmagine = map.convert(p);
-                g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 5, 5);
-            }
+            System.out.println("Log complete");
+            System.exit(-1);
             
-            frame.revalidate();
-            frame.repaint();
-        }        
+           
+        }
+
+
                 
         return 0;
     }

@@ -4,6 +4,6 @@
 - Liceo Scientifico Statale opzione scienze applicate  "Galileo Galilei"
 
 
-![Univr Logo](/images/logoUnivr.png)
-![Galileo Galilei Logo](/images/logoGG.png)
+![Univr Logo](/images/logoUnivr.png) ![Galileo Galilei Logo](/images/logoGG.png)
+
 ![Intcatch Boat](/images/intcatchBoat.png)

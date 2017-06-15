@@ -103,8 +103,7 @@ public class Framework extends JPanel implements ActionListener{
             catch(InterruptedException e) {}
         }
          
-        if(actions!=2)
-        {
+        
          
         if(actions==1){
             //condizione valida se il log non viene caricato
@@ -130,12 +129,10 @@ public class Framework extends JPanel implements ActionListener{
                     g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 5, 5);
                     frame.revalidate();
                     frame.repaint();
-                }
-        }      
-            
+                }    
             
             System.out.println("Log complete");
-            System.exit(-1);
+            
             
            
         }
@@ -212,4 +209,4 @@ public class Framework extends JPanel implements ActionListener{
         catch (Exception ex) {
              }
     }
-    }
+}

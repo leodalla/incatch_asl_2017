@@ -101,7 +101,10 @@ public class Framework extends JPanel implements ActionListener{
                 Thread.sleep(300);
             }
             catch(InterruptedException e) {}
-        }      
+        }
+         
+        if(actions!=2)
+        {
          
         if(actions==1){
             //condizione valida se il log non viene caricato
@@ -114,8 +117,8 @@ public class Framework extends JPanel implements ActionListener{
                 return(-1);
             }            
             //System.out.println("log:" +log.size());
-            do
-            {
+            
+            
                 Graphics2D g2d = mapImage.createGraphics();
                 g2d.setColor(Color.BLACK); 
 
@@ -128,8 +131,8 @@ public class Framework extends JPanel implements ActionListener{
                     frame.revalidate();
                     frame.repaint();
                 }
-                
-            }while(actions==1);
+        }      
+            
             
             System.out.println("Log complete");
             System.exit(-1);

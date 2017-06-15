@@ -22,7 +22,7 @@ public class LogReader {
     
     public boolean read()
     {
-        System.out.println("sto per leggere il file "+nomefile);
+        //System.out.println("sto per leggere il file "+nomefile);
         FileReader f;
         try{
             
@@ -48,12 +48,14 @@ public class LogReader {
             return false;
             }
             
-            if(riga==null)
-            break;
-            parse(riga);
-            System.out.println("riga "+riga);
-            //long ts= getTimestamp();
-            //v.addElement(ts);     
+
+              if(riga==null)
+                break;
+              parse(riga);
+              //System.out.println("riga "+riga);
+              //long ts= getTimestamp();
+              //v.addElement(ts);     
+
         }
         
         return true;
@@ -75,25 +77,27 @@ public class LogReader {
         if(index2>0)
         {
             String sp= riga.substring(index2+6);
-            System.out.println("sp: "+sp);
+            //System.out.println("sp: "+sp);
             String x= sp.substring(sp.indexOf("p")+4, sp.indexOf(","));
-            System.out.println("x: "+x);
+
+            //System.out.println("x: "+x);
+
             String temp=sp.substring(sp.indexOf(",")+1);
             String y= temp.substring(0, temp.indexOf(","));
-            System.out.println("y: "+y);
+            //System.out.println("y: "+y);
 
             double xd=Double.valueOf(x);
-            System.out.println("xd: "+xd);
+            //System.out.println("xd: "+xd);
             double yd=Double.valueOf(y);
-            System.out.println("yd: "+yd);
+            //System.out.println("yd: "+yd);
             Point2D p= new Point2D.Double(xd,yd);
 
             String q= temp.substring(temp.indexOf("q")+4, temp.indexOf("z")-3);
 
-            System.out.println("q: "+q);
+            //System.out.println("q: "+q);
 
             String z= temp.substring(temp.indexOf("z")+7,temp.indexOf("\"}"));
-            System.out.println("z: "+z);
+            //System.out.println("z: "+z);
 
             if(z.equals("32North")){
                 Pose pose= new Pose(timestamp,p, q, z);

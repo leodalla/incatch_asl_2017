@@ -40,7 +40,7 @@ public class Map extends JPanel {
     public void setUl(Point2D ul){
         
         this.ul=ul;
-         System.out.println("OK: ");
+         
     }
     
     public void setBr(Point2D br){
@@ -66,7 +66,7 @@ public class Map extends JPanel {
     public String toString(){
             
             
-        System.out.println("dentrotoString");
+       
         
         String description="";
         
@@ -105,7 +105,7 @@ public class Map extends JPanel {
         z.setLocation(x,y);
         System.out.println("puntoX: "+z.getX());
         System.out.println("puntoY: "+z.getY());
-        
-    return z;
+
+        return z;
     }
 }

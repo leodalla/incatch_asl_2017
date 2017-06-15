@@ -82,9 +82,7 @@ public class Framework extends JPanel implements ActionListener{
     
     public void addMap(){
         mapImage= map.getMapImage();
-        //System.out.println("mapimage: "+mapImage.getHeight());
         mapIcon=new ImageIcon(mapImage);
-        //System.out.println("image: " + mapIcon.getIconWidth());
         mapLabel=new JLabel(mapIcon);
         frame.getContentPane().add(mapLabel,BorderLayout.CENTER);
         frame.getContentPane().add(new JScrollPane(mapLabel), BorderLayout.CENTER);
@@ -126,23 +124,8 @@ public class Framework extends JPanel implements ActionListener{
         }
             
                 Graphics2D g2d = mapImage.createGraphics();
-                g2d.setColor(Color.BLACK); 
-
-
+                g2d.setColor(Color.RED);
                 Iterator<Pose> it= log.iterator();
-                /*while(it.hasNext()){
-                     while(actions==2){
-                         if(actions==1){
-                             break;
-                         }
-                         
-                     }
-                    Pose p = it.next();
-                    Point2D puntoImmagine = map.convert(p);
-                    g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 5, 5);
-                    frame.revalidate();
-                    frame.repaint();
-                }*/
                 while(it.hasNext()){
                     while(actions==1){
                         Pose p = it.next();
@@ -160,60 +143,55 @@ public class Framework extends JPanel implements ActionListener{
                     }
                     if(actions==3){
                     }
-                    
                 }
             System.out.println("Log complete");
-            actions=2;          
-        
-    
+            actions=2;
         return 0;
     }
-
     
     public void actionPerformed(ActionEvent e) {
-              String command= e.getActionCommand();
-              System.out.println("command: " + command);
-              if(command.equals("play")){
-                  playButton.setEnabled(false);
-                  stopButton.setEnabled(true);
-                  nextButton.setEnabled(true);
-                  actions= 1;
-                  
-              }else if(command.equals("stop")){
-                  playButton.setEnabled(true);
-                  stopButton.setEnabled(false);
-                  nextButton.setEnabled(true);
-                  actions= 2;
-                  
-              }else if(command.equals("next")){
-                  playButton.setEnabled(true);
-                  stopButton.setEnabled(true);
-                  nextButton.setEnabled(true);
-                  actions= 3;
+            String command= e.getActionCommand();
+            System.out.println("command: " + command);
+            if(command.equals("play")){
+                playButton.setEnabled(false);
+                stopButton.setEnabled(true);
+                nextButton.setEnabled(true);
+                actions= 1;
+
+            }else if(command.equals("stop")){
+                playButton.setEnabled(true);
+                stopButton.setEnabled(false);
+                nextButton.setEnabled(true);
+                actions= 2;
+
+            }else if(command.equals("next")){
+                playButton.setEnabled(true);
+                stopButton.setEnabled(true);
+                nextButton.setEnabled(true);
+                actions= 3;
+            }
+              if(command=="map"){
+              mapChooser();
+
               }
-                if(command=="map"){
-                mapChooser();
-                
-                }
-                if(command=="log")
-                fileChooser();               
+              if(command=="log")
+              fileChooser();               
     }
  
     public void mapChooser() {
-     try {        
-        JFileChooser fileChooser = new JFileChooser("./dati");
-        int n = fileChooser.showOpenDialog(Framework.this);
-        if (n == JFileChooser.APPROVE_OPTION) {
-            File f = fileChooser.getSelectedFile();
-            //System.out.println("name: "+f);
-            mapname=f.toString();
-            MapReader mr = new MapReader(mapname);
-            map = mr.getMap();
-            addMap();
-            }
-            }
-     catch (Exception ex) {
-        } 
+        try {        
+           JFileChooser fileChooser = new JFileChooser("./dati");
+           int n = fileChooser.showOpenDialog(Framework.this);
+           if (n == JFileChooser.APPROVE_OPTION) {
+               File f = fileChooser.getSelectedFile();
+               mapname=f.toString();
+               MapReader mr = new MapReader(mapname);
+               map = mr.getMap();
+               addMap();
+               }
+               }
+        catch (Exception ex) {
+           } 
     }
  
     public void fileChooser() {  
@@ -222,12 +200,9 @@ public class Framework extends JPanel implements ActionListener{
         int n = fileChooser.showOpenDialog(Framework.this);
         if (n == JFileChooser.APPROVE_OPTION) {
         File f = fileChooser.getSelectedFile();
-        //System.out.println("name: "+f);
         String nomefile= new String(f.toString());
-        //System.out.println(nomefile);
         LogReader lr= new LogReader(nomefile);
         if(lr.read()){
-            //System.out.println("LOG OK");  
              }
         else{
            System.out.println("Errore chiudo"); 

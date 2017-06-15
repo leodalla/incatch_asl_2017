@@ -101,49 +101,74 @@ public class Framework extends JPanel implements ActionListener{
                 Thread.sleep(300);
             }
             catch(InterruptedException e) {}
-        }
-         
-        if(actions!=2)
-        {
-         
-        if(actions==1){
+        }    
+        if(log==null){
             //condizione valida se il log non viene caricato
-            if(log==null){
+            if(actions==1){
                 String message = "selezionare un log prima di premere play.";
                 JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
                 JOptionPane.ERROR_MESSAGE);
                 actions=0;
                 playButton.setEnabled(true);
                 return(-1);
-            }            
-            //System.out.println("log:" +log.size());
-            
+            }     
+            if(actions==2){
+            //condizione valida se attivo stop prima di play
+                if(actions==0){
+                String message = "selezionare prima play di stop!";
+                JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
+                actions=0;
+                playButton.setEnabled(true);
+                return(-1);
+                }
+            }
+        }
             
                 Graphics2D g2d = mapImage.createGraphics();
                 g2d.setColor(Color.BLACK); 
 
 
                 Iterator<Pose> it= log.iterator();
-                while(it.hasNext()){
+                /*while(it.hasNext()){
+                     while(actions==2){
+                         if(actions==1){
+                             break;
+                         }
+                         
+                     }
                     Pose p = it.next();
                     Point2D puntoImmagine = map.convert(p);
                     g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 5, 5);
                     frame.revalidate();
                     frame.repaint();
+                }*/
+                while(it.hasNext()){
+                    if(actions==1){
+                        Pose p = it.next();
+                        Point2D puntoImmagine = map.convert(p);
+                        g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 3, 3);
+                        frame.revalidate();
+                        frame.repaint();
+                    }
+                    if(actions==2){
+                        while(actions==2){
+                            //stopButton.setEnabled(false);
+                            if(actions!=2){
+                                break;
+                            }
+                        }
+                    }
+                    if(actions==3){
+                    }
                 }
-        }      
-            
-            
             System.out.println("Log complete");
-            System.exit(-1);
-            
-           
-        }
-
-
-                
+            actions=2;          
+        
+    
         return 0;
     }
+
     
     public void actionPerformed(ActionEvent e) {
               String command= e.getActionCommand();
@@ -153,11 +178,13 @@ public class Framework extends JPanel implements ActionListener{
                   stopButton.setEnabled(true);
                   nextButton.setEnabled(true);
                   actions= 1;
+                  
               }else if(command.equals("stop")){
                   playButton.setEnabled(true);
                   stopButton.setEnabled(false);
                   nextButton.setEnabled(true);
                   actions= 2;
+                  
               }else if(command.equals("next")){
                   playButton.setEnabled(true);
                   stopButton.setEnabled(true);

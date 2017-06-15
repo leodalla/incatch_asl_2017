@@ -1,4 +1,5 @@
-    package incatch;
+package incatch;
+
 import java.util.Vector;
 import java.util.*;
 import java.awt.FlowLayout;
@@ -18,18 +19,31 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import java.awt.geom.Ellipse2D;
+
 public class Framework extends JPanel implements ActionListener{
     //Variabile d'istanza
     private ImageIcon mapIcon;
     private BufferedImage mapImage;
     private JLabel mapLabel;
     private JFrame frame;
-    private JButton playButton, stopButton, nextButton , mapButton,logButton ;
+    private JButton playButton,
+                    stopButton,
+                    nextButton,
+                    mapButton,
+                    logButton;
     private JPanel buttonPanel;
     private String mapname;
+    //actions
+    //0 standby
+    //1 play
+    //2 stop
+    //3 next
     private int actions;
     private Vector<Pose> log;
-    private Map map;   
+    private Map map;
+    
+    private GraphDraw graphFrame;
     
     public Framework(){
         JFrame.setDefaultLookAndFeelDecorated(false);
@@ -38,8 +52,10 @@ public class Framework extends JPanel implements ActionListener{
         frame.setSize(1000,600);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        actions=0;
-        log=null;
+        //stand by
+        actions = 0;
+        log = null;
+        
     }
     
     public void addButton(){
@@ -164,32 +180,34 @@ public class Framework extends JPanel implements ActionListener{
     }
     
     public void actionPerformed(ActionEvent e) {
-            String command= e.getActionCommand();
-            System.out.println("command: " + command);
-            if(command.equals("play")){
-                playButton.setEnabled(false);
-                stopButton.setEnabled(true);
-                nextButton.setEnabled(true);
-                actions= 1;
+        String command= e.getActionCommand();
+        System.out.println("command: " + command);
+        if(command.equals("play")){
+            playButton.setEnabled(false);
+            stopButton.setEnabled(true);
+            nextButton.setEnabled(true);
+            actions= 1;
 
-            }else if(command.equals("stop")){
-                playButton.setEnabled(true);
-                stopButton.setEnabled(false);
-                nextButton.setEnabled(true);
-                actions= 2;
+        }else if(command.equals("stop")){
+            playButton.setEnabled(true);
+            stopButton.setEnabled(false);
+            nextButton.setEnabled(true);
+            actions= 2;
 
-            }else if(command.equals("next")){
-                playButton.setEnabled(true);
-                stopButton.setEnabled(true);
-                nextButton.setEnabled(true);
-                actions= 3;
-            }
-              if(command=="map"){
-              mapChooser();
-
-              }
-              if(command=="log")
-              fileChooser();               
+        }
+        else if(command.equals("next")){
+            playButton.setEnabled(true);
+            stopButton.setEnabled(true);
+            nextButton.setEnabled(true);
+            actions= 3;
+        }
+        else if(command.equals("map")){
+            mapChooser();
+            createGraph();
+        }
+        else if(command.equals("log")){
+            fileChooser();
+        }
     }
  
     public void mapChooser() {
@@ -228,4 +246,60 @@ public class Framework extends JPanel implements ActionListener{
         catch (Exception ex) {
              }
     }
+    
+    public void createGraph() {
+        graphFrame = new GraphDraw("Graph");
+        graphFrame.setSize((int)(mapImage.getWidth()),
+                               (int)(mapImage.getHeight()));
+        graphFrame.setVisible(true);
+               
+        //log is a vector of <Pose>
+        Iterator<Pose> it = log.iterator();
+        while(it.hasNext()) {
+            Pose pose = it.next();
+            Point2D point = map.convert(pose);
+            double x = point.getX();
+            double y = point.getY();
+                        
+            ArrayList<Node> nodes = graphFrame.getNodes();
+            
+            Node n = new Node(nodes.size(),
+                        point.getX(),
+                        point.getY(),
+                        (int)x,
+                        (int)y);
+            for (Node node : nodes) {
+                System.out.println(node.toString());
+                double d = GraphDraw.distanceBetweenUTM(
+                        x,
+                        y,
+                        node.getX(),
+                        node.getY());
+                
+                if(d < 2.0 && d > 0) {
+
+                    System.out.println("draw Edge(" + node.getIdx() +
+                                  "," + n.getIdx() + ")");
+                    graphFrame.addEdge(node.getIdx(), n.getIdx());
+
+                }
+            }
+            graphFrame.addNode(n);
+            
+            //wait
+            try{
+                Thread.sleep(30);
+            }
+            catch(InterruptedException ie) {
+
+            }
+            
+            graphFrame.revalidate();
+            graphFrame.repaint();
+        }
+        
+        System.out.println("finito");
     }
+}
+
+

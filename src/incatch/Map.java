@@ -76,6 +76,6 @@ public class Map extends JPanel {
             System.out.println("puntoX: "+z.getX());
             System.out.println("puntoY: "+z.getY());
         }
-    return z;
+        return z;
     }
 }

@@ -4,4 +4,3 @@
 - Liceo Scientifico Statale opzione scienze applicate  "Galileo Galilei"
 
 ![Galileo Galilei Logo](/images/logoGG.png)
-Format: ![Alt Text](url)

@@ -1,38 +1,35 @@
 package incatch;
-
 import java.awt.geom.Point2D;
 
 public class Pose {
-     
+    //variabili d'istanza
     private long timestamp;
     private String q;
     private String zone;
     private Point2D p;
     
-    public Pose(long timestamp, Point2D p, String q, String zone)
-    {
+public Pose(long timestamp, Point2D p, String q, String zone){
         this.timestamp=timestamp;
         this.p=p;
         this.q=q;
         this.zone=zone;
-    }
+     }
     
-    public long getTimestamp()
-    {
+public long getTimestamp(){
         return timestamp;
-    }
-    
-    public String toString()
-    {
+     }
+     
+public String toString(){
         String s= "Pose(";
         s = s + (timestamp+",");
         s += (p.getX()+"," + p.getY()+",");
         s += (q+"," + zone +")");
         return s;
-    }
-    public Point2D getP(){
+     }
+
+public Point2D getP(){
         return p;
+     }
     }
-}
    
    

@@ -124,7 +124,13 @@ public class Framework extends JPanel implements ActionListener{
         }
             
                 Graphics2D g2d = mapImage.createGraphics();
+<<<<<<< HEAD
                 g2d.setColor(Color.RED);
+=======
+                g2d.setColor(Color.RED); 
+
+
+>>>>>>> master
                 Iterator<Pose> it= log.iterator();
                 while(it.hasNext()){
                     while(actions==1){

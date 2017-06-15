@@ -6,4 +6,4 @@
 
 ![Univr Logo](/images/logoUnivr.png) ![Galileo Galilei Logo](/images/logoGG.png)
 
-![Intcatch Boat](/images/intcatchBoat.png)
+![Intcatch Boat](/images/intcatchBoat.jpg)

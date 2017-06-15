@@ -153,10 +153,14 @@ public class Framework extends JPanel implements ActionListener{
                    }
                     while(actions==2){
                             stopButton.setEnabled(false);
+                            try{
+                                Thread.sleep(30);
+                            }
+                            catch(InterruptedException e){}
                     }
-                    
                     if(actions==3){
                     }
+                    
                 }
             System.out.println("Log complete");
             actions=2;          

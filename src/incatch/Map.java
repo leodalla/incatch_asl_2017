@@ -91,6 +91,7 @@ public class Map extends JPanel {
         double br_x=br.getX();
         System.out.println("brX: "+br_x);
         double x = ((t_x-ul_x)*width)/(br_x-ul_x);
+       
         System.out.println("X: "+x);
         double t_y=t.getY();
         System.out.println("ty: "+t_y);

@@ -82,9 +82,9 @@ public class Framework extends JPanel implements ActionListener{
     
     public void addMap(){
         mapImage= map.getMapImage();
-        System.out.println("mapimage: "+mapImage.getHeight());
+        //System.out.println("mapimage: "+mapImage.getHeight());
         mapIcon=new ImageIcon(mapImage);
-        System.out.println("image: " + mapIcon.getIconWidth());
+        //System.out.println("image: " + mapIcon.getIconWidth());
         mapLabel=new JLabel(mapIcon);
         frame.getContentPane().add(mapLabel,BorderLayout.CENTER);
         frame.getContentPane().add(new JScrollPane(mapLabel), BorderLayout.CENTER);
@@ -97,12 +97,11 @@ public class Framework extends JPanel implements ActionListener{
     
     public int run(){
          while(actions==0){
-             try{
-            Thread.sleep(300);
-                    }
-             catch(InterruptedException e) {
-                    }
-         }      
+            try{
+                Thread.sleep(300);
+            }
+            catch(InterruptedException e) {}
+        }      
          
         if(actions==1){
             //condizione valida se il log non viene caricato
@@ -113,25 +112,23 @@ public class Framework extends JPanel implements ActionListener{
                 actions=0;
                 playButton.setEnabled(true);
                 return(-1);
+
             }            
             System.out.println("log:" +log.size());
-            Graphics2D g2d = mapImage.createGraphics();
-
-              
-            g2d.setColor(Color.BLACK);
-              
-            Iterator<Pose> it= log.iterator();
+            
+        }            
+        Graphics2D g2d = mapImage.createGraphics();
+        Iterator<Pose> it= log.iterator();
         
-            while(it.hasNext()){
-                Pose p= it.next();
-                Point2D puntoImmagine=map.convert(p);
-                g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 5, 5);
-
+        while(it.hasNext()){
+            Pose p= it.next();
+            Point2D puntoImmagine=map.convert(p);
+            g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 5, 5);
             g2d.setColor(Color.BLACK); 
-            }        
-            frame.revalidate();
-            frame.repaint();
-        }
+        }        
+        frame.revalidate();
+        frame.repaint();
+        
         return 0;
     }
     
@@ -168,7 +165,7 @@ public class Framework extends JPanel implements ActionListener{
         int n = fileChooser.showOpenDialog(Framework.this);
         if (n == JFileChooser.APPROVE_OPTION) {
             File f = fileChooser.getSelectedFile();
-            System.out.println("name: "+f);
+            //System.out.println("name: "+f);
             mapname=f.toString();
             MapReader mr = new MapReader(mapname);
             map = mr.getMap();
@@ -185,12 +182,12 @@ public class Framework extends JPanel implements ActionListener{
         int n = fileChooser.showOpenDialog(Framework.this);
         if (n == JFileChooser.APPROVE_OPTION) {
         File f = fileChooser.getSelectedFile();
-        System.out.println("name: "+f);
+        //System.out.println("name: "+f);
         String nomefile= new String(f.toString());
-        System.out.println(nomefile);
+        //System.out.println(nomefile);
         LogReader lr= new LogReader(nomefile);
         if(lr.read()){
-            System.out.println("LOG OK");  
+            //System.out.println("LOG OK");  
              }
         else{
            System.out.println("Errore chiudo"); 

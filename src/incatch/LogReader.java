@@ -49,6 +49,16 @@ public class LogReader {
             }
             
 
+<<<<<<< Updated upstream
+=======
+            if(riga==null)
+            break;
+            parse(riga);
+            System.out.println("riga "+riga);
+            //long ts= getTimestamp();
+            //v.addElement(ts);     
+
+>>>>>>> Stashed changes
               if(riga==null)
                 break;
               parse(riga);
@@ -81,7 +91,10 @@ public class LogReader {
             String x= sp.substring(sp.indexOf("p")+4, sp.indexOf(","));
 
             //System.out.println("x: "+x);
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
             String temp=sp.substring(sp.indexOf(",")+1);
             String y= temp.substring(0, temp.indexOf(","));
             //System.out.println("y: "+y);

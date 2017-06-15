@@ -82,9 +82,9 @@ public class Framework extends JPanel implements ActionListener{
     
     public void addMap(){
         mapImage= map.getMapImage();
-        System.out.println("mapimage: "+mapImage.getHeight());
+        //System.out.println("mapimage: "+mapImage.getHeight());
         mapIcon=new ImageIcon(mapImage);
-        System.out.println("image: " + mapIcon.getIconWidth());
+        //System.out.println("image: " + mapIcon.getIconWidth());
         mapLabel=new JLabel(mapIcon);
         frame.getContentPane().add(mapLabel,BorderLayout.CENTER);
         frame.getContentPane().add(new JScrollPane(mapLabel), BorderLayout.CENTER);
@@ -114,7 +114,7 @@ public class Framework extends JPanel implements ActionListener{
                 playButton.setEnabled(true);
                 return(-1);
                  }            
-             System.out.println("log:" +log.size());
+             //System.out.println("log:" +log.size());
              Graphics2D g2d = mapImage.createGraphics();
 <<<<<<< HEAD
               
@@ -174,7 +174,7 @@ public class Framework extends JPanel implements ActionListener{
         int n = fileChooser.showOpenDialog(Framework.this);
         if (n == JFileChooser.APPROVE_OPTION) {
             File f = fileChooser.getSelectedFile();
-            System.out.println("name: "+f);
+            //System.out.println("name: "+f);
             mapname=f.toString();
             MapReader mr = new MapReader(mapname);
             map = mr.getMap();
@@ -191,12 +191,12 @@ public class Framework extends JPanel implements ActionListener{
         int n = fileChooser.showOpenDialog(Framework.this);
         if (n == JFileChooser.APPROVE_OPTION) {
         File f = fileChooser.getSelectedFile();
-        System.out.println("name: "+f);
+        //System.out.println("name: "+f);
         String nomefile= new String(f.toString());
-        System.out.println(nomefile);
+        //System.out.println(nomefile);
         LogReader lr= new LogReader(nomefile);
         if(lr.read()){
-            System.out.println("LOG OK");  
+            //System.out.println("LOG OK");  
              }
         else{
            System.out.println("Errore chiudo"); 

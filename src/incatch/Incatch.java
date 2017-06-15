@@ -11,17 +11,18 @@ import javax.swing.JScrollPane;
 
 public class Incatch {
     
-     private static void createAndShowGUI() {
+    private static void createAndShowGUI() {
         //Use the Java look and feel.
         try {
             UIManager.setLookAndFeel(
-                UIManager.getCrossPlatformLookAndFeelClassName());
+            UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (Exception e) { }
         Framework framework = new Framework();
         framework.addButton();
         int code = framework.run();
         while(code<0){
             framework.run();
+<<<<<<< Updated upstream
         }
         
         //framework.addMap();
@@ -62,3 +63,13 @@ public class Incatch {
         */
     }
 }
+=======
+            }  
+     }
+     
+    public static void main(String[] args) {
+     //class lookk and feel
+        createAndShowGUI();
+    }
+    }
+>>>>>>> Stashed changes

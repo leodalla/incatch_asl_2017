@@ -9,7 +9,7 @@
 
 ## Attività svolte:
 
-1. Presentazione del drone acquatico
+1. Presentazione del drone acquatico :fire:
 1. Scrittura, compilazione ed esecuzione di un programma in JAVA
     1. Acquisizione e analisi dati reali
     1. Installazione NetBeans e lettura dati da log.txt

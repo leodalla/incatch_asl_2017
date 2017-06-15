@@ -144,21 +144,17 @@ public class Framework extends JPanel implements ActionListener{
                     frame.repaint();
                 }*/
                 while(it.hasNext()){
-                    if(actions==1){
+                    while(actions==1){
                         Pose p = it.next();
                         Point2D puntoImmagine = map.convert(p);
                         g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 3, 3);
                         frame.revalidate();
                         frame.repaint();
+                   }
+                    while(actions==2){
+                            stopButton.setEnabled(false);
                     }
-                    if(actions==2){
-                        while(actions==2){
-                            //stopButton.setEnabled(false);
-                            if(actions!=2){
-                                break;
-                            }
-                        }
-                    }
+                    
                     if(actions==3){
                     }
                 }

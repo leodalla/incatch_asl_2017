@@ -122,7 +122,6 @@ public class Framework extends JPanel implements ActionListener{
                 }
             }
         }
-            
                 Graphics2D g2d = mapImage.createGraphics();
                 g2d.setColor(Color.RED); 
                 Iterator<Pose> it= log.iterator();
@@ -142,6 +141,21 @@ public class Framework extends JPanel implements ActionListener{
                             catch(InterruptedException e){}
                     }
                     if(actions==3){
+                        stopButton.setEnabled(false);
+                        Pose p = it.next();
+                        Point2D puntoImmagine = map.convert(p);
+                        g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 3, 3);
+                        frame.revalidate();
+                        frame.repaint();
+                        actions=2;
+                        while(actions==2){
+                            stopButton.setEnabled(false);
+                            try{
+                                Thread.sleep(30);
+                            }
+                            catch(InterruptedException e){}
+                        }
+                        
                     }
                 }
             System.out.println("Log complete");

@@ -1,0 +1,19 @@
+body { background-color: #E5E4E2 }
+	
+.titprinc { color: #00B951;
+			text-align: center;
+			text-decoration: oblique;
+			font-size: 48pt;
+			font-family: Arial}
+			
+.titsec { color: BLACK;
+			text-align: left;
+			text-decoration: oblique;
+			font-size: 40pt;
+			font-family: Arial}
+	
+.txt { color: BLACK;
+			text-align: left;
+			font-size: 18pt;
+			font-weight: 600;
+			font-family: Arial	}

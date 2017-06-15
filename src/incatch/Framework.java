@@ -32,7 +32,8 @@ public class Framework extends JPanel implements ActionListener{
                     nextButton,
                     mapButton,
                     logButton,
-                    graphButton;
+                    graphButton,
+                    riconoscimentiButton;
     private JPanel buttonPanel;
     private String mapname;
     //actions
@@ -97,10 +98,18 @@ public class Framework extends JPanel implements ActionListener{
         graphButton.setActionCommand("graph");
         graphButton.addActionListener(this);
         buttonPanel.add(graphButton);
+        //riconoscimenti button
+        ImageIcon riconoscimentiButtonIcon = new ImageIcon("images/rico.png");
+        riconoscimentiButton = new JButton(riconoscimentiButtonIcon);
+        riconoscimentiButton.setActionCommand("rico");
+        riconoscimentiButton.addActionListener(this);
+        buttonPanel.add(riconoscimentiButton);
         //altro
         frame.getContentPane().add(buttonPanel,BorderLayout.NORTH);
         frame.setVisible(true);
-        frame.repaint();     
+        frame.repaint();  
+        mapButton.setEnabled(false);
+        graphButton.setEnabled(false);
     }
     
     public void addMap(){
@@ -124,6 +133,7 @@ public class Framework extends JPanel implements ActionListener{
             catch(InterruptedException e) {}
         }    
         if(log==null){
+            
             //condizione valida se il log non viene caricato
             if(actions==1){
                 String message = "selezionare un log prima di premere play.";
@@ -140,10 +150,23 @@ public class Framework extends JPanel implements ActionListener{
                 JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
                 JOptionPane.ERROR_MESSAGE);
                 actions=0;
-                playButton.setEnabled(true);
                 return(-1);
                 }
             }
+            if(actions==3){
+            //condizione valida se attivo stop prima di play
+                if(actions==0){
+                String message = "selezionare il LOG!";
+                JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
+                actions=0;
+                return(-1);
+                }
+            }
+        }
+        else{
+            mapButton.setEnabled(true);
+            
         }
                 Graphics2D g2d = mapImage.createGraphics();
                 g2d.setColor(Color.RED); 
@@ -164,20 +187,16 @@ public class Framework extends JPanel implements ActionListener{
                             catch(InterruptedException e){}
                     }
                     if(actions==3){
-                        stopButton.setEnabled(false);
-                        Pose p = it.next();
-                        Point2D puntoImmagine = map.convert(p);
-                        g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 3, 3);
-                        frame.revalidate();
-                        frame.repaint();
-                        actions=2;
-                        while(actions==2){
-                            stopButton.setEnabled(false);
-                            try{
-                                Thread.sleep(30);
-                            }
-                            catch(InterruptedException e){}
+                        actions=0;
+                        while(actions==0){
+                            Pose p = it.next();
+                            Point2D puntoImmagine = map.convert(p);
+                            g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 3, 3);
+                            frame.revalidate();
+                            frame.repaint();
+                            actions=2;
                         }
+                        
                         
                     }
                 }
@@ -210,12 +229,17 @@ public class Framework extends JPanel implements ActionListener{
         }
         else if(command.equals("map")){
             mapChooser();
+            graphButton.setEnabled(true);
         }
         else if(command.equals("log")){
             fileChooser();
+            mapButton.setEnabled(true);  
         }
         else if(command.equals("graph")){
             createGraph();
+        }
+        else if(command.equals("rico")){
+            rico();
         }
     }
  
@@ -233,6 +257,12 @@ public class Framework extends JPanel implements ActionListener{
                }
         catch (Exception ex) {
            } 
+    }
+    public void rico() {
+        JOptionPane.showMessageDialog(frame,
+    "Programma sviluppato da \nCarloBottaro, LeonardoDallaRiva e DomenicoBloisi",
+    "CREDITI.",
+    JOptionPane.PLAIN_MESSAGE);
     }
  
     public void fileChooser() {  
@@ -278,7 +308,7 @@ public class Framework extends JPanel implements ActionListener{
                         (int)x,
                         (int)y);
             for (Node node : nodes) {
-                System.out.println(node.toString());
+               // System.out.println(node.toString());
                 double d = GraphDraw.distanceBetweenUTM(
                         x,
                         y,
@@ -287,8 +317,8 @@ public class Framework extends JPanel implements ActionListener{
                 
                 if(d < 2.0 && d > 0) {
 
-                    System.out.println("draw Edge(" + node.getIdx() +
-                                  "," + n.getIdx() + ")");
+                //    System.out.println("draw Edge(" + node.getIdx() +
+                 //                 "," + n.getIdx() + ")");
                     graphFrame.addEdge(node.getIdx(), n.getIdx());
 
                 }

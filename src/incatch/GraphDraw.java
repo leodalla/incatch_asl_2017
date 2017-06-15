@@ -104,10 +104,10 @@ public class GraphDraw extends JFrame {
             
 	    g.drawLine(xip, yip, xjp, yjp);
 	}
-
+        g.setColor(Color.black);
 	for (Node n : nodes) {	    
 	    
-            g.setColor(Color.black);
+            
             
             int x = (int)(n.x*OFFSET);
             int y = (int)(n.y*OFFSET);
@@ -122,7 +122,7 @@ public class GraphDraw extends JFrame {
             xp -= 8000;
             yp -= 6700;
             
-            g.fillOval(xp, yp, 3, 3);
+            g.fillOval(xp, yp, 6, 6);
 	    
 	}
     }

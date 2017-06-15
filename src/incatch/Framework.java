@@ -31,7 +31,8 @@ public class Framework extends JPanel implements ActionListener{
                     stopButton,
                     nextButton,
                     mapButton,
-                    logButton;
+                    logButton,
+                    graphButton;
     private JPanel buttonPanel;
     private String mapname;
     //actions
@@ -90,6 +91,12 @@ public class Framework extends JPanel implements ActionListener{
         logButton.setActionCommand("log");
         logButton.addActionListener(this);
         buttonPanel.add(logButton);
+        //graph button
+        ImageIcon graphButtonIcon = new ImageIcon("images/graph.png");
+        graphButton = new JButton(graphButtonIcon);
+        graphButton.setActionCommand("graph");
+        graphButton.addActionListener(this);
+        buttonPanel.add(graphButton);
         //altro
         frame.getContentPane().add(buttonPanel,BorderLayout.NORTH);
         frame.setVisible(true);
@@ -203,10 +210,12 @@ public class Framework extends JPanel implements ActionListener{
         }
         else if(command.equals("map")){
             mapChooser();
-            createGraph();
         }
         else if(command.equals("log")){
             fileChooser();
+        }
+        else if(command.equals("graph")){
+            createGraph();
         }
     }
  

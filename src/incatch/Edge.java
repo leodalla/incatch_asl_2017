@@ -6,6 +6,7 @@ class Edge {
     public Edge(int ii, int jj) {
 	i = ii;
 	j = jj;	    
+        //System.out.println("Sono nell'Edge");
     }
     
     public int getI() {

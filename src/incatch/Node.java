@@ -11,6 +11,7 @@ class Node {
                 int _x,
                 int _y)
     {
+       // System.out.println("Sono nell node");
         idx = _idx;
         utm_x = _utm_x;
         utm_y = _utm_y;

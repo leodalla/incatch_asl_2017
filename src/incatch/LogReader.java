@@ -29,19 +29,19 @@ public class LogReader {
         }
         BufferedReader b;
         b=new BufferedReader(f);
-        String riga="";
-        while(true){
-            try{
-              riga=b.readLine();
+        try{
+            String riga=b.readLine();
+                while(riga!=null){
+                    parse(riga);
+                    riga=b.readLine();
+                }
             }
-            catch (IOException e){
+        catch (IOException e){
             e.printStackTrace();
             return false;
-            }
-              if(riga==null)
-                break;
-              parse(riga);
         }
+        
+        
         return true;
     }
     public void parse(String riga){

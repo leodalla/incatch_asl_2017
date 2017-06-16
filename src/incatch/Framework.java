@@ -165,7 +165,11 @@ public class Framework extends JPanel implements ActionListener{
             }
         }
         else{
-            mapButton.setEnabled(true);
+            
+            
+            
+            
+            mapButton.setEnabled(false);
             
         }
                 Graphics2D g2d = mapImage.createGraphics();
@@ -212,6 +216,7 @@ public class Framework extends JPanel implements ActionListener{
             playButton.setEnabled(false);
             stopButton.setEnabled(true);
             nextButton.setEnabled(true);
+            
             actions= 1;
 
         }else if(command.equals("stop")){
@@ -230,10 +235,12 @@ public class Framework extends JPanel implements ActionListener{
         else if(command.equals("map")){
             mapChooser();
             graphButton.setEnabled(true);
+            mapButton.setEnabled(false);
         }
         else if(command.equals("log")){
             fileChooser();
             mapButton.setEnabled(true);  
+            logButton.setEnabled(false);
         }
         else if(command.equals("graph")){
             createGraph();

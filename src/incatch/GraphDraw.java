@@ -66,12 +66,12 @@ public class GraphDraw extends JFrame {
             int xj = (int)(nodes.get(e.getJ()).x*OFFSET);
             int yj = (int)(nodes.get(e.getJ()).y*OFFSET);
             
-            /*
-            System.out.println("xi: " + xi);
-            System.out.println("yi: " + yi);
-            System.out.println("xj: " + xj);
-            System.out.println("yj: " + yj);
-            */
+            
+            System.out.println("sono nel GraphDraw");
+            //System.out.println("yi: " + yi);
+            //System.out.println("xj: " + xj);
+            //System.out.println("yj: " + yj);
+            
             
             
             //double theta = Math.PI/2;    
@@ -98,8 +98,8 @@ public class GraphDraw extends JFrame {
             yjp -= 6700;
             
             
-            System.out.println("xjp: " + xjp);
-            System.out.println("yjp: " + yjp);
+            //System.out.println("xjp: " + xjp);
+            //System.out.println("yjp: " + yjp);
             
             
 	    g.drawLine(xip, yip, xjp, yjp);

@@ -35,7 +35,7 @@ public class Framework extends JPanel implements ActionListener{
                     logButton,
                     graphButton,
                     riconoscimentiButton;
-    private JPanel buttonPanel;
+    private JPanel buttonPanel,progressPanel;
     private String mapname;
     //actions
     //0 standby
@@ -172,8 +172,9 @@ public class Framework extends JPanel implements ActionListener{
                 Graphics2D g2d = mapImage.createGraphics();
                 g2d.setColor(Color.RED); 
                 Iterator<Pose> it= log.iterator();
+                
                 while(it.hasNext()){
-                    while(actions==1){
+                    while((actions==1)&&(it.hasNext())){
                         Pose p = it.next();
                         Point2D puntoImmagine = map.convert(p);
                         g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 3, 3);
@@ -189,18 +190,17 @@ public class Framework extends JPanel implements ActionListener{
                     }
                     if(actions==3){
                         actions=0;
-                        while(actions==0){
+                        while((actions==0)&&(it.hasNext())){
                             Pose p = it.next();
                             Point2D puntoImmagine = map.convert(p);
                             g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 3, 3);
                             frame.revalidate();
                             frame.repaint();
                             actions=2;
-                        }
-                        
-                        
+                        }  
                     }
                 }
+                
             System.out.println("Log complete");
             actions=2;
         return 0;
@@ -292,11 +292,15 @@ public class Framework extends JPanel implements ActionListener{
     
     public void createGraph() {
         JProgressBar progressBar = new JProgressBar();
+        progressPanel =new JPanel(new FlowLayout(FlowLayout.LEFT));
         
         graphFrame = new GraphDraw("Graph");
         graphFrame.setSize((int)(mapImage.getWidth()),
                                (int)(mapImage.getHeight()));
         graphFrame.setVisible(true);
+        graphFrame.add(progressPanel);
+        progressPanel.add(progressBar);
+       
         int cont=0;
         //log is a vector of <Pose>
         Iterator<Pose> it = log.iterator();
@@ -306,7 +310,10 @@ public class Framework extends JPanel implements ActionListener{
             double x = point.getX();
             double y = point.getY();
                         cont++;
+                        System.out.println("cont: "+ cont);
                         progressBar.setValue(cont);
+                        progressBar.setVisible(true);
+                       
             ArrayList<Node> nodes = graphFrame.getNodes();
             
             Node n = new Node(nodes.size(),
@@ -323,7 +330,7 @@ public class Framework extends JPanel implements ActionListener{
                         node.getX(),
                         node.getY());
                 
-                if(d < 2.0 && d > 0) {
+                if(d < 5.0 && d > 0) {
                     graphFrame.addEdge(node.getIdx(), n.getIdx());
                 }
             }

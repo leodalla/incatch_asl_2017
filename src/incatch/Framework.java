@@ -291,7 +291,7 @@ public class Framework extends JPanel implements ActionListener{
         graphFrame.setSize((int)(mapImage.getWidth()),
                                (int)(mapImage.getHeight()));
         graphFrame.setVisible(true);
-               
+        int cont=0; 
         //log is a vector of <Pose>
         Iterator<Pose> it = log.iterator();
         while(it.hasNext()) {
@@ -299,7 +299,9 @@ public class Framework extends JPanel implements ActionListener{
             Point2D point = map.convert(pose);
             double x = point.getX();
             double y = point.getY();
-                        
+            
+            cont++;
+            System.out.println("cont: " +cont);
             ArrayList<Node> nodes = graphFrame.getNodes();
             
             Node n = new Node(nodes.size(),

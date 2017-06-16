@@ -18,6 +18,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JProgressBar;
 
 import java.awt.geom.Ellipse2D;
 
@@ -165,7 +166,7 @@ public class Framework extends JPanel implements ActionListener{
             }
         }
         else{
-            mapButton.setEnabled(true);
+            mapButton.setEnabled(false);
             
         }
                 Graphics2D g2d = mapImage.createGraphics();
@@ -212,6 +213,7 @@ public class Framework extends JPanel implements ActionListener{
             playButton.setEnabled(false);
             stopButton.setEnabled(true);
             nextButton.setEnabled(true);
+            
             actions= 1;
 
         }else if(command.equals("stop")){
@@ -230,10 +232,12 @@ public class Framework extends JPanel implements ActionListener{
         else if(command.equals("map")){
             mapChooser();
             graphButton.setEnabled(true);
+            mapButton.setEnabled(false);
         }
         else if(command.equals("log")){
             fileChooser();
             mapButton.setEnabled(true);  
+            logButton.setEnabled(false);
         }
         else if(command.equals("graph")){
             createGraph();
@@ -287,11 +291,13 @@ public class Framework extends JPanel implements ActionListener{
     }
     
     public void createGraph() {
+        JProgressBar progressBar = new JProgressBar();
+        
         graphFrame = new GraphDraw("Graph");
         graphFrame.setSize((int)(mapImage.getWidth()),
                                (int)(mapImage.getHeight()));
         graphFrame.setVisible(true);
-        int cont=0; 
+        int cont=0;
         //log is a vector of <Pose>
         Iterator<Pose> it = log.iterator();
         while(it.hasNext()) {
@@ -299,9 +305,8 @@ public class Framework extends JPanel implements ActionListener{
             Point2D point = map.convert(pose);
             double x = point.getX();
             double y = point.getY();
-            
-            cont++;
-            System.out.println("cont: " +cont);
+                        cont++;
+                        progressBar.setValue(cont);
             ArrayList<Node> nodes = graphFrame.getNodes();
             
             Node n = new Node(nodes.size(),
@@ -310,6 +315,7 @@ public class Framework extends JPanel implements ActionListener{
                         (int)x,
                         (int)y);
             for (Node node : nodes) {
+                
                // System.out.println(node.toString());
                 double d = GraphDraw.distanceBetweenUTM(
                         x,
@@ -318,11 +324,7 @@ public class Framework extends JPanel implements ActionListener{
                         node.getY());
                 
                 if(d < 2.0 && d > 0) {
-
-                //    System.out.println("draw Edge(" + node.getIdx() +
-                 //                 "," + n.getIdx() + ")");
                     graphFrame.addEdge(node.getIdx(), n.getIdx());
-
                 }
             }
             graphFrame.addNode(n);

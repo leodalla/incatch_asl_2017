@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JProgressBar;
+import java.lang.Math;
 
 import java.awt.geom.Ellipse2D;
 
@@ -302,6 +303,9 @@ public class Framework extends JPanel implements ActionListener{
         progressPanel.add(progressBar);
        
         int cont=0;
+        double temp_x=0,temp_y=0;
+        
+        double max=-1;
         //log is a vector of <Pose>
         Iterator<Pose> it = log.iterator();
         while(it.hasNext()) {
@@ -310,7 +314,7 @@ public class Framework extends JPanel implements ActionListener{
             double x = point.getX();
             double y = point.getY();
                         cont++;
-                        System.out.println("cont: "+ cont);
+                        //System.out.println("cont: "+ cont);
                         progressBar.setValue(cont);
                         progressBar.setVisible(true);
                        
@@ -321,16 +325,48 @@ public class Framework extends JPanel implements ActionListener{
                         point.getY(),
                         (int)x,
                         (int)y);
+            
+            temp_x=point.getX();
+            temp_y=point.getY();
+            Pose oldpose=null;
+            
+            for(int i=0;i<log.size();i++)
+            {
+                
+                Pose p= log.get(i);
+                if(oldpose==null)
+                {
+                    oldpose=p;
+                }
+                else
+                {
+                    Point2D p1 = map.convert(p);
+                    Point2D p2 = map.convert(oldpose);
+                    double d = Math.sqrt(Math.pow(p1.getX() - p2.getX(), 2) +
+                         Math.pow(p1.getY() - p2.getY(), 2));
+                    
+                    //System.out.println("d: "+ d);
+                    if(max<d)
+                    {
+                        max=d;
+                        System.out.println("max: "+ max);
+                    }
+                    oldpose=p;
+                }
+                
+                
+            }
+            
+            
             for (Node node : nodes) {
                 
-               // System.out.println(node.toString());
-                double d = GraphDraw.distanceBetweenUTM(
-                        x,
-                        y,
-                        node.getX(),
-                        node.getY());
                 
-                if(d < 5.0 && d > 0) {
+               // System.out.println(node.toString());
+                double d = GraphDraw.distanceBetweenUTM( x, y, node.getX(), node.getY());
+                       
+                
+                //System.out.println("d: "+ d);
+                if(d < max && d > 0) {
                     graphFrame.addEdge(node.getIdx(), n.getIdx());
                 }
             }
@@ -348,7 +384,7 @@ public class Framework extends JPanel implements ActionListener{
             graphFrame.repaint();
         }
         
-        System.out.println("finito");
+        System.out.println("finito" +max);
     }
 }
 

@@ -13,3 +13,4 @@
 1. Scrittura, compilazione ed esecuzione di un programma in JAVA :coffee:
     1. Acquisizione e analisi dati reali
     1. Installazione NetBeans e lettura dati da log.txt
+    1. Costruzione e visualizzazione di un grafo partendo dalle pose di log

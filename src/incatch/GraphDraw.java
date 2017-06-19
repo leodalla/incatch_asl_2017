@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class GraphDraw extends JFrame {
+public class GraphDraw extends JPanel {
     int width;
     int height;
 
@@ -13,16 +13,8 @@ public class GraphDraw extends JFrame {
     ArrayList<Edge> edges;
 
     public GraphDraw() { //Constructor
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	nodes = new ArrayList<Node>();
-	edges = new ArrayList<Edge>();
-	width = 30;
-	height = 30;
-    }
-
-    public GraphDraw(String name) { //Construct with label
-	this.setTitle(name);
-	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        
 	nodes = new ArrayList<Node>();
 	edges = new ArrayList<Edge>();
 	width = 30;

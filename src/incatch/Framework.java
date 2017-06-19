@@ -47,7 +47,8 @@ public class Framework extends JPanel implements ActionListener{
     private Vector<Pose> log;
     private Map map;
     
-    private GraphDraw graphFrame;
+    private GraphDraw graphPanel;
+    private JFrame graphFrame;
     
     public Framework(){
         JFrame.setDefaultLookAndFeelDecorated(false);
@@ -292,17 +293,38 @@ public class Framework extends JPanel implements ActionListener{
     }
     
     public void createGraph() {
-        JProgressBar progressBar = new JProgressBar();
-        progressPanel =new JPanel(new FlowLayout(FlowLayout.LEFT));
+        int cont=0;
         
-        graphFrame = new GraphDraw("Graph");
+        //progressPanel =new JPanel(new FlowLayout(FlowLayout.LEFT));
+        
+        graphFrame = new JFrame("Grafo");
+                
+        graphFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                
+                
+                
+        graphPanel= new GraphDraw();
+       
         graphFrame.setSize((int)(mapImage.getWidth()),
                                (int)(mapImage.getHeight()));
-        graphFrame.setVisible(true);
-        graphFrame.add(progressPanel);
-        progressPanel.add(progressBar);
        
-        int cont=0;
+        JProgressBar progressBar = new JProgressBar(0, 100);
+        JFrame progressFrame= new JFrame();
+        progressBar.setValue(0);
+        progressBar.setStringPainted(true);
+        JPanel panel = new JPanel();
+        panel.add(progressBar);
+        graphFrame.getContentPane().add(playButton,BorderLayout.NORTH);
+        graphFrame.getContentPane().add(panel,BorderLayout.NORTH);
+        graphFrame.getContentPane().add(graphPanel,BorderLayout.CENTER);
+ 
+        //panel.add(progressBar);
+        progressFrame.getContentPane().add(panel,BorderLayout.NORTH);
+        progressFrame.setSize(300, 300);
+        progressFrame.setVisible(true);
+        progressFrame.repaint();
+        graphFrame.setVisible(true);
+        
         double temp_x=0,temp_y=0;
         
         double max=-1;
@@ -318,7 +340,7 @@ public class Framework extends JPanel implements ActionListener{
                         progressBar.setValue(cont);
                         progressBar.setVisible(true);
                        
-            ArrayList<Node> nodes = graphFrame.getNodes();
+            ArrayList<Node> nodes = graphPanel.getNodes();
             
             Node n = new Node(nodes.size(),
                         point.getX(),
@@ -367,10 +389,10 @@ public class Framework extends JPanel implements ActionListener{
                 
                 //System.out.println("d: "+ d);
                 if(d < max && d > 0) {
-                    graphFrame.addEdge(node.getIdx(), n.getIdx());
+                    graphPanel.addEdge(node.getIdx(), n.getIdx());
                 }
             }
-            graphFrame.addNode(n);
+            graphPanel.addNode(n);
             
             //wait
             try{

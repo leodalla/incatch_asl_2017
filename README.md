@@ -14,3 +14,4 @@
     1. Acquisizione e analisi dati reali
     1. Installazione NetBeans e lettura dati da log.txt
     1. Costruzione e visualizzazione di un grafo partendo dalle pose di log
+1. Utilizzo e programmazione robot LEGO MINDSTORM 

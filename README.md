@@ -21,4 +21,9 @@
 Data | argomenti trattati
 ------------ | -------------
 12 Giugno 2017 | Aspetti organizzativi delle attività,Primi programmi in java.
-13 Giugno 2017| 
+13 Giugno 2017 | Acquisizione e analisi dati reali.
+14 Giugno 2017 | Lettura dei dati da Log.
+15 Giugno 2017 | Implementazione struttura dati Grafo
+16 Giugno 2017 | Breve introduzione all'intelligenza artificiale 
+19 Giugno 2017 | Modello di giuda differenziale su robot LEGO MINDSTORM NXT
+20 Giugno 2017 | Line following complessa su robot Lego.

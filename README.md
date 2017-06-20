@@ -20,6 +20,5 @@
 
 Data | argomenti trattati
 ------------ | -------------
-12 Giugno 2017 | Aspetti organizzativi delle attività,Primi programmi in java
-
-Content in the first column | Content in the second column
+12 Giugno 2017 | Aspetti organizzativi delle attività,Primi programmi in java.
+13 Giugno 2017| 

@@ -22,6 +22,7 @@ public class LogReader {
         FileReader f;
         try{
             f=new FileReader(nomefile);
+            System.out.println("file: " +nomefile);
         }
         catch (FileNotFoundException e) {
             System.err.println("non trovo il file " +nomefile);
@@ -32,6 +33,8 @@ public class LogReader {
         try{
             String riga=b.readLine();
                 while(riga!=null){
+                    
+                    
                     parse(riga);
                     riga=b.readLine();
                 }

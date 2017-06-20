@@ -273,20 +273,24 @@ public class Framework extends JPanel implements ActionListener{
  
     public void fileChooser() {  
         try {       
-        JFileChooser fileChooser = new JFileChooser("./Dati");
-        int n = fileChooser.showOpenDialog(Framework.this);
-        if (n == JFileChooser.APPROVE_OPTION) {
-        File f = fileChooser.getSelectedFile();
-        String nomefile= new String(f.toString());
-        LogReader lr= new LogReader(nomefile);
-        if(lr.read()){
-             }
-        else{
-           System.out.println("Errore chiudo"); 
-           return;
+            JFileChooser fileChooser = new JFileChooser("./Dati");
+            int n = fileChooser.showOpenDialog(Framework.this);
+            if (n == JFileChooser.APPROVE_OPTION) {
+                File f = fileChooser.getSelectedFile();
+                String nomefile= new String(f.toString());
+                LogReader lr= new LogReader(nomefile);
+                
+                if(lr.read()){
+                   
+                }
+                else{
+                   System.out.println("Errore chiudo"); 
+                   return;
+
+                }
+                log = lr.getVector();
+               
             }
-        log = lr.getVector();
-             }
              } 
         catch (Exception ex) {
              }

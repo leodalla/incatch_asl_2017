@@ -25,5 +25,5 @@ Data | argomenti trattati
 14 Giugno 2017 | Lettura dei dati da Log.
 15 Giugno 2017 | Implementazione struttura dati Grafo
 16 Giugno 2017 | Breve introduzione all'intelligenza artificiale 
-19 Giugno 2017 | Modello di giuda differenziale su robot LEGO MINDSTORM NXT
+19 Giugno 2017 | Modello di guida differenziale su robot LEGO MINDSTORM NXT
 20 Giugno 2017 | Line following complessa su robot Lego.

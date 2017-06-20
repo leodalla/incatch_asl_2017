@@ -15,3 +15,11 @@
     1. Installazione NetBeans e lettura dati da log.txt
     1. Costruzione e visualizzazione di un grafo partendo dalle pose di log
 1. Utilizzo e programmazione robot LEGO MINDSTORM 
+
+## Diario delle lezioni:
+
+Data | argomenti trattati
+------------ | -------------
+12 Giugno 2017 | Aspetti organizzativi delle attività,Primi programmi in java
+
+Content in the first column | Content in the second column

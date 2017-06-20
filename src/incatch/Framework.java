@@ -339,6 +339,7 @@ public class Framework extends JPanel implements ActionListener{
                         //System.out.println("cont: "+ cont);
                         progressBar.setValue(cont);
                         progressBar.setVisible(true);
+                        
                        
             ArrayList<Node> nodes = graphPanel.getNodes();
             

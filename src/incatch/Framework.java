@@ -19,9 +19,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JProgressBar;
-import java.lang.Math;
-
-import java.awt.geom.Ellipse2D;
 
 public class Framework extends JPanel implements ActionListener{
     //Variabile d'istanza
@@ -201,9 +198,22 @@ public class Framework extends JPanel implements ActionListener{
                             actions=2;
                         }  
                     }
+                    
+                }
+                int reply = JOptionPane.showConfirmDialog(null, "REFRESH?", "BHO INTANTO VEDIAMO SE DA FUNZIA", JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.YES_OPTION) {
+                //JOptionPane.showMessageDialog(null, "DAMMI UN SECONDO CHE PULISCO LA MAPPA");
+                MapReader mr = new MapReader(mapname);
+                map = mr.getMap();
+                addMap();                  
+                // mapChooser();
+                  actions=2;
+                }
+                else {
+                   JOptionPane.showMessageDialog(null, "OTTIMA SCELTA");
+                   
                 }
                 
-            System.out.println("Log complete");
             actions=2;
         return 0;
     }

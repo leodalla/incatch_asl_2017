@@ -309,10 +309,7 @@ public class Framework extends JPanel implements ActionListener{
         
         graphFrame = new JFrame("Grafo");
                 
-        graphFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                
-                
-                
+        graphFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
         graphPanel= new GraphDraw();
        
         graphFrame.setSize((int)(mapImage.getWidth()),
@@ -338,8 +335,11 @@ public class Framework extends JPanel implements ActionListener{
         double temp_x=0,temp_y=0;
         
         double max=-1;
-        //log is a vector of <Pose>
-        Iterator<Pose> it = log.iterator();
+        //log is a vector of <Pose
+        Vector<Pose> logRidotto= riduciLog(log,5);
+        System.out.println("logridotto: " +logRidotto.size());
+       Iterator<Pose> it = logRidotto.iterator();
+        
         while(it.hasNext()) {
             Pose pose = it.next();
             Point2D point = map.convert(pose);
@@ -348,7 +348,7 @@ public class Framework extends JPanel implements ActionListener{
                         cont++;
                         //System.out.println("cont: "+ cont);
                         progressBar.setValue(cont);
-                        progressBar.setVisible(true);
+                        progressBar.setVisible(false);
                         
                        
             ArrayList<Node> nodes = graphPanel.getNodes();
@@ -417,7 +417,31 @@ public class Framework extends JPanel implements ActionListener{
             graphFrame.repaint();
         }
         
-        System.out.println("finito" +max);
+        
+    }
+    private Vector<Pose> riduciLog(Vector<Pose> log, int new_size){
+        Vector<Pose> ridotto=new Vector<Pose>();
+         Iterator<Pose> it = log.iterator();
+         
+         int skip_value= log.size()/new_size;
+         while(it.hasNext()){
+             ridotto.add(it.next());
+             for(int i=0;i<skip_value;i++){
+                 if(it.hasNext()){
+                     it.next();
+                 }
+                 else{
+                     break;
+                 }
+                 
+                 
+             }
+         }
+        
+        
+        
+        return ridotto;
+        
     }
 }
 

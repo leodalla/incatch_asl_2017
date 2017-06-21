@@ -27,3 +27,4 @@ Data | argomenti trattati
 16 Giugno 2017 | Breve introduzione all'intelligenza artificiale 
 19 Giugno 2017 | Modello di guida differenziale su robot LEGO MINDSTORM NXT
 20 Giugno 2017 | Line following complessa su robot Lego.
+21 Giugno 2017 | Sviluppo pagina Web e video.

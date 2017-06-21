@@ -72,9 +72,9 @@ public class Map extends JPanel {
         //System.out.println("y: "+y);
         z.setLocation(x,y);
         if((z.getX()<0)||(z.getY()<0)){
-            System.out.println("Errore, coordinate negative");
-            System.out.println("puntoX: "+z.getX());
-            System.out.println("puntoY: "+z.getY());
+            //System.out.println("Errore, coordinate negative");
+            //System.out.println("puntoX: "+z.getX());
+            //System.out.println("puntoY: "+z.getY());
         }
         return z;
     }

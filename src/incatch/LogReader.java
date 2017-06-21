@@ -22,7 +22,7 @@ public class LogReader {
         FileReader f;
         try{
             f=new FileReader(nomefile);
-            System.out.println("file: " +nomefile);
+            //System.out.println("file: " +nomefile);
         }
         catch (FileNotFoundException e) {
             System.err.println("non trovo il file " +nomefile);

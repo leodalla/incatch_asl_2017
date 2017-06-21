@@ -336,8 +336,15 @@ public class Framework extends JPanel implements ActionListener{
         
         double max=-1;
         //log is a vector of <Pose
-        Vector<Pose> logRidotto= riduciLog(log,5);
+        Vector<Pose> logRidotto= riduciLog(log,7);
         System.out.println("logridotto: " +logRidotto.size());
+        
+        Graph graph = generateGraph(logRidotto, 4.);
+        graph.print();
+        
+        
+        
+        
        Iterator<Pose> it = logRidotto.iterator();
         
         while(it.hasNext()) {
@@ -399,7 +406,7 @@ public class Framework extends JPanel implements ActionListener{
                        
                 
                 //System.out.println("d: "+ d);
-                if(d < max && d > 0) {
+                if(d <= max && d >= 0) {
                     graphPanel.addEdge(node.getIdx(), n.getIdx());
                 }
             }
@@ -419,28 +426,57 @@ public class Framework extends JPanel implements ActionListener{
         
         
     }
+    
     private Vector<Pose> riduciLog(Vector<Pose> log, int new_size){
         Vector<Pose> ridotto=new Vector<Pose>();
-         Iterator<Pose> it = log.iterator();
+        Iterator<Pose> it = log.iterator();
          
-         int skip_value= log.size()/new_size;
-         while(it.hasNext()){
-             ridotto.add(it.next());
-             for(int i=0;i<skip_value;i++){
-                 if(it.hasNext()){
-                     it.next();
-                 }
-                 else{
-                     break;
-                 }
-                 
-                 
-             }
-         }
-        
-        
-        
+        int skip_value= log.size()/new_size;
+        while(it.hasNext()){
+            ridotto.add(it.next());
+            for(int i=0;i<skip_value;i++){
+                if(it.hasNext()){
+                    it.next();
+                }
+                else{
+                    break;
+                }
+            }
+        }        
         return ridotto;
+    }
+    
+    private Graph generateGraph(Vector<Pose> poses, double max_dist){
+        Iterator<Pose> it = poses.iterator();
+        Graph graph = new Graph();
+        while(it.hasNext()){
+            Pose pose = it.next();
+            Point2D point = map.convert(pose);
+            double x = point.getX();
+            double y = point.getY();
+                       
+            ArrayList<Node> nodes = graph.getNodes();
+            
+            Node n = new Node(nodes.size(),
+                        point.getX(),
+                        point.getY(),
+                        (int)x,
+                        (int)y);
+            
+            for (Node node : nodes) {
+                                
+               // System.out.println(node.toString());
+                double d = Graph.distanceBetweenUTM( x, y, node.getX(),
+                        node.getY());                
+                //System.out.println("d: "+ d);
+                if(d <= max_dist && d > 0) {
+                    graph.addEdge(node.getIdx(), n.getIdx());
+                }
+            }
+            graph.addNode(n);
+            
+        }        
+        return graph;
         
     }
 }

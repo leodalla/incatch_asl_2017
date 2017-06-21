@@ -16,4 +16,8 @@ class Edge {
     public int getJ() {
         return j;
     }
+    
+    public String toString() {
+        return "Edge(" + i + ", " + j + ")";
+    }
 }

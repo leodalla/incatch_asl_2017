@@ -34,6 +34,7 @@ public class Framework extends JPanel implements ActionListener{
                     graphButton,
                     riconoscimentiButton;
     private JPanel buttonPanel,progressPanel;
+    private String currentLogFile;
     private String mapname;
     //actions
     //0 standby
@@ -200,21 +201,16 @@ public class Framework extends JPanel implements ActionListener{
                     }
                     
                 }
-                int reply = JOptionPane.showConfirmDialog(null, "REFRESH?", "BHO INTANTO VEDIAMO SE DA FUNZIA", JOptionPane.YES_NO_OPTION);
+                int reply = JOptionPane.showConfirmDialog(null, "RICARICARE?", "---", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
-                //JOptionPane.showMessageDialog(null, "DAMMI UN SECONDO CHE PULISCO LA MAPPA");
-                MapReader mr = new MapReader(mapname);
-                map = mr.getMap();
-                addMap();                  
-                // mapChooser();
-                  actions=2;
+                    setVisible(false); //you can't see me!
+                    frame.dispose(); //Destroy the JFrame object
+                    return -2;
+                    
                 }
                 else {
                    JOptionPane.showMessageDialog(null, "OTTIMA SCELTA");
-                   
                 }
-                
-            actions=2;
         return 0;
     }
     
@@ -287,8 +283,8 @@ public class Framework extends JPanel implements ActionListener{
             int n = fileChooser.showOpenDialog(Framework.this);
             if (n == JFileChooser.APPROVE_OPTION) {
                 File f = fileChooser.getSelectedFile();
-                String nomefile= new String(f.toString());
-                LogReader lr= new LogReader(nomefile);
+                currentLogFile = new String(f.toString());
+                LogReader lr= new LogReader(currentLogFile);
                 
                 if(lr.read()){
                    
@@ -386,7 +382,7 @@ public class Framework extends JPanel implements ActionListener{
                     if(max<d)
                     {
                         max=d;
-                        System.out.println("max: "+ max);
+                        //System.out.println("max: "+ max);
                     }
                     oldpose=p;
                 }

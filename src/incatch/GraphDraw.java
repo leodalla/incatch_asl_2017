@@ -59,7 +59,7 @@ public class GraphDraw extends JPanel {
             int yj = (int)(nodes.get(e.getJ()).y*OFFSET);
             
             
-            System.out.println("sono nel GraphDraw");
+           
             //System.out.println("yi: " + yi);
             //System.out.println("xj: " + xj);
             //System.out.println("yj: " + yj);
@@ -77,8 +77,8 @@ public class GraphDraw extends JPanel {
             yip -= 6700;
             
             
-            System.out.println("xip: " + xip);
-            System.out.println("yip: " + yip);
+            //System.out.println("xip: " + xip);
+            //System.out.println("yip: " + yip);
             
             
             int xjp = xj;

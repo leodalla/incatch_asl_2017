@@ -21,7 +21,14 @@ public class Incatch {
         framework.addButton();
         int code = framework.run();
         while(code<0){
-            framework.run();
+            
+            System.out.println("code: "+code);
+            if(code==-2){
+                framework = new Framework();
+                framework.addButton();
+            }
+            code = framework.run();
+        
         }  
     }
     

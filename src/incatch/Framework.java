@@ -328,7 +328,7 @@ public class Framework extends JPanel implements ActionListener{
         //panel.add(progressBar);
         progressFrame.getContentPane().add(panel,BorderLayout.NORTH);
         progressFrame.setSize(300, 300);
-        progressFrame.setVisible(true);
+        progressFrame.setVisible(false);
         progressFrame.repaint();
         graphFrame.setVisible(true);
         

@@ -55,10 +55,15 @@ public class Graph {
         return nodes;
     }
     
+    public ArrayList<Edge> getEdges() {
+        return edges;
+    }
+    
     public static double distanceBetweenUTM(double i_x, double i_y,
                                             double j_x, double j_y)
     {
         return Math.sqrt(Math.pow(i_x - j_x, 2) +
                          Math.pow(i_y - j_y, 2));
     }
+    
 }

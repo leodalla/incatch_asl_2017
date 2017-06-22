@@ -299,7 +299,7 @@ public class Framework extends JPanel implements ActionListener{
                 
                 log = lr.getVector();
                 
-                log = riduciLog(log, 50);
+                log = riduciLog(log, 10);
             }
         } 
         catch (Exception ex) {
@@ -426,7 +426,14 @@ public class Framework extends JPanel implements ActionListener{
         Graph graph = generateGraph(log, max);
         graph.print();
         
-        
+        DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+        ArrayList<Node> nodes = graph.getNodes();
+        dijkstra.execute(nodes.get(0));
+        LinkedList<Node> path = dijkstra.getPath(nodes.get(9));
+        System.out.println("Shortest Path:");
+        for (Node n : path) {
+            System.out.println(n.toString());
+        }        
     }
     
     private Vector<Pose> riduciLog(Vector<Pose> log, int new_size){
@@ -458,8 +465,8 @@ public class Framework extends JPanel implements ActionListener{
             Point2D point = map.convert(pose);
             double x = point.getX();
             double y = point.getY();
-            Node location = new Node("Node_" + i,
-                                    "Node_" + i,
+            Node location = new Node(String.valueOf(i),
+                                    String.valueOf(i),
                                     nodes.size(),
                                     point.getX(),
                                     point.getY(),
@@ -479,62 +486,17 @@ public class Framework extends JPanel implements ActionListener{
                                                     m.getX(),
                                                     m.getY());
                 if(d <= max_dist && d > 0) {
-                    graph.addEdge(node.getIdx(), n.getIdx());
-                    
-                    Edge e = new Edge(  "Edge_"+j,
+                                       
+                    Edge e = new Edge(  String.valueOf(j),
                                         nodes.get(n.getIdx()),
                                         nodes.get(m.getIdx()),
                                         d);
-                            
-                            
-                            ,nodes.get(sourceLocNo), nodes.get(destLocNo), duration );
-        edges.add(lane);
-                    
-                    
+                    edges.add(e);
+                    j++;
                 }
             }
-        
-        private void addLane(String laneId, int sourceLocNo, int destLocNo,
-            int duration) {
-        Edge lane = new Edge(laneId,nodes.get(sourceLocNo), nodes.get(destLocNo), duration );
-        edges.add(lane);
-    }
-        
-        
-        
-        
-        Iterator<Pose> it = poses.iterator();
-        while(it.hasNext()){
-            Pose pose = it.next();
-            Point2D point = map.convert(pose);
-            double x = point.getX();
-            double y = point.getY();
-                       
-            ArrayList<Node> nodes = graph.getNodes();
-            
-            Node n = new Node(nodes.size(),
-                        point.getX(),
-                        point.getY(),
-                        (int)x,
-                        (int)y);
-            
-            for (Node node : nodes) {
-                                
-               // System.out.println(node.toString());
-                double d = Graph.distanceBetweenUTM( x, y, node.getX(),
-                        node.getY());                
-                //System.out.println("d: "+ d);
-                if(d <= max_dist && d > 0) {
-                    graph.addEdge(node.getIdx(), n.getIdx());
-                }
-            }
-            graph.addNode(n);
-            
-        }        
-        return graph;
-        */
-        
-        
+        }
+               
         return new Graph(nodes, edges);
         
     }

@@ -17,7 +17,7 @@ class Edge {
         destination = null;
     }
     
-     public Edge(String id, Node source, Node destination, double weight) {
+    public Edge(String id, Node source, Node destination, double weight) {
         this.id = id;
         this.source = source;
         this.destination = destination;
@@ -33,12 +33,15 @@ class Edge {
     }
     
     public String toString() {
-        return "Edge(" + i + ", " + j + ")";
+        return "Edge(" + source.getId() + ", " + destination.getId() + ")";
+        
+        
     }
     
     public String getId() {
         return id;
     }
+    
     public Node getDestination() {
         return destination;
     }
@@ -46,9 +49,8 @@ class Edge {
     public Node getSource() {
         return source;
     }
+    
     public double getWeight() {
         return weight;
     }
-
-
 }

@@ -40,15 +40,15 @@ public class Graph {
     }
     
     public void print() {
+        System.out.println("Nodes:");
+	for (Node n : nodes) {	    
+	    System.out.println(n.toString());
+	}
+        System.out.println();
         System.out.println("Edges:");
 	for (Edge e : edges) {
             System.out.println(e.toString());
 	}
-        System.out.println();
-        System.out.println("Nodes:");
-	for (Node n : nodes) {	    
-	    System.out.println(n.toString());
-	}         
     }
     
     public ArrayList<Node> getNodes() {

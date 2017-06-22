@@ -88,10 +88,10 @@ public class GraphDraw extends JPanel {
             xip -= 500;
             yip -= 300;
             
-            
+            /*
             System.out.println("xip: " + xip);
             System.out.println("yip: " + yip);
-            
+            */
             
             int xjp = xj;
                     //(int)(Math.cos(theta) * xj - Math.sin(theta) * yj);

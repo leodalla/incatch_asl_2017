@@ -392,7 +392,7 @@ public class Framework extends JPanel implements ActionListener{
                 
                 log = lr.getVector();
 
-                log = riduciLog(log, 10);
+                log = riduciLog(log, 30);
             }
         } 
         catch (Exception ex) {
@@ -500,7 +500,7 @@ public class Framework extends JPanel implements ActionListener{
         DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
         ArrayList<Node> nodes = graph.getNodes();
         dijkstra.execute(nodes.get(0));
-        LinkedList<Node> path = dijkstra.getPath(nodes.get(9));
+        LinkedList<Node> path = dijkstra.getPath(nodes.get(29));
         System.out.println("Shortest Path:");
         for (Node n : path) {
             System.out.println(n.toString());

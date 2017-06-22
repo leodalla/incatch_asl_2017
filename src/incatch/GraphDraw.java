@@ -8,7 +8,7 @@ import javax.swing.*;
 public class GraphDraw extends JPanel {
     int width;
     int height;
-
+    int a=0;
     ArrayList<Node> nodes;
     ArrayList<Edge> edges;
     
@@ -126,8 +126,13 @@ public class GraphDraw extends JPanel {
             xp -= 500;
             yp -= 300;
             
+            
+            String m=null;
+            m= String.valueOf(a).toString();
             g.fillOval(xp, yp, 6, 6);
-	    
+            g.setFont(new Font("Arial", Font.PLAIN, 18)); 
+	    g.drawString(m , xp+8, yp+8);
+            a++;
 	}
     }
     

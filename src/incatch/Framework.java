@@ -430,13 +430,7 @@ public class Framework extends JPanel implements ActionListener{
         double temp_x=0,temp_y=0;
         double max=-1;
 
-        //log is a vector of <Pose
-        Vector<Pose> logRidotto= riduciLog(log,7);
-        System.out.println("logridotto: " +logRidotto.size());
-        Graph graph = generateGraph(logRidotto, 4.);
-        graph.print();
-        Iterator<Pose> it = logRidotto.iterator();
-
+        Iterator<Pose> it = log.iterator();
         while(it.hasNext()) {
             Pose pose = it.next();
             Point2D point = map.convert(pose);
@@ -500,7 +494,7 @@ public class Framework extends JPanel implements ActionListener{
             graphFrame.repaint();
         }
         
-        graph = generateGraph(log, max);
+        Graph graph = generateGraph(log, max);
         graph.print();
         
         DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);

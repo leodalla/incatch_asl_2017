@@ -499,7 +499,7 @@ public class Framework extends JPanel implements ActionListener{
         
         DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
         ArrayList<Node> nodes = graph.getNodes();
-        dijkstra.execute(nodes.get(0));
+        dijkstra.execute(nodes.get(3));
         LinkedList<Node> path = dijkstra.getPath(nodes.get(9));
         System.out.println("Shortest Path:");
         for (Node n : path) {

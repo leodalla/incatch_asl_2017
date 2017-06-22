@@ -1,13 +1,7 @@
 package incatch;
 
-import java.util.Vector;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
+import javax.swing.*;
 
 public class Incatch {
     
@@ -28,14 +22,13 @@ public class Incatch {
                 framework.addButton();
             }
             code = framework.run();
-        
         }  
     }
     
     public static void main(String[] args) {
-        TestDijkstraAlgorithm dijkstra= new TestDijkstraAlgorithm();
-        dijkstra.testExcute();
-        System.exit(-1);
+        //TestDijkstraAlgorithm dijkstra= new TestDijkstraAlgorithm();
+        //dijkstra.testExcute();
+        //System.exit(-1);
         createAndShowGUI();
     }
 }

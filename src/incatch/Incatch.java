@@ -33,9 +33,11 @@ public class Incatch {
     }
     
     public static void main(String[] args) {
+        /*
         TestDijkstraAlgorithm dijkstra= new TestDijkstraAlgorithm();
         dijkstra.testExcute();
         System.exit(-1);
+        */
         createAndShowGUI();
     }
 }

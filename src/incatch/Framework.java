@@ -32,7 +32,8 @@ public class Framework extends JPanel implements ActionListener{
                     mapButton,
                     logButton,
                     graphButton,
-                    riconoscimentiButton;
+                    riconoscimentiButton,
+                    chooseButton;
     private JPanel buttonPanel,progressPanel;
     private String currentLogFile;
     private String mapname;
@@ -105,6 +106,12 @@ public class Framework extends JPanel implements ActionListener{
         riconoscimentiButton.setActionCommand("rico");
         riconoscimentiButton.addActionListener(this);
         buttonPanel.add(riconoscimentiButton);
+        //chooseButton
+        
+        chooseButton = new JButton(graphButtonIcon);
+        chooseButton.setActionCommand("graph");
+        chooseButton.addActionListener(this);
+        buttonPanel.add(chooseButton);
         //altro
         frame.getContentPane().add(buttonPanel,BorderLayout.NORTH);
         frame.setVisible(true);
@@ -418,7 +425,7 @@ public class Framework extends JPanel implements ActionListener{
         progressBar.setStringPainted(true);
         JPanel panel = new JPanel();
         panel.add(progressBar);
-        graphFrame.getContentPane().add(playButton,BorderLayout.NORTH);
+        graphFrame.getContentPane().add(chooseButton,BorderLayout.NORTH);
         graphFrame.getContentPane().add(panel,BorderLayout.NORTH);
         graphFrame.getContentPane().add(graphPanel,BorderLayout.CENTER);
         //panel.add(progressBar);

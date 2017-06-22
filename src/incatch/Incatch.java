@@ -26,17 +26,12 @@ public class Incatch {
     }
     
     public static void main(String[] args) {
-<<<<<<< HEAD
-        //TestDijkstraAlgorithm dijkstra= new TestDijkstraAlgorithm();
-        //dijkstra.testExcute();
-        //System.exit(-1);
-=======
+
         /*
         TestDijkstraAlgorithm dijkstra= new TestDijkstraAlgorithm();
         dijkstra.testExcute();
         System.exit(-1);
         */
->>>>>>> master
         createAndShowGUI();
     }
 }

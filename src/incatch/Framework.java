@@ -190,20 +190,18 @@ public class Framework extends JPanel implements ActionListener{
                         previusAng=angolo;
                         angolo=angleColor(previusPoint,currentPoint);
                         colore=angle(angolo,previusAng,colore);
-                        
-                        /*
                         if(colore==1){
-                            g2d.setColor(Color.red); 
+                            g2d.setColor(Color.red);
                         }
-                         else if(colore==2){
-                            g2d.setColor(Color.black);
-         
-                         }
-                        */
+                        if(colore==2){
+                            g2d.setColor(Color.black);       
+                        }
+                        if(colore==3){
+                            g2d.setColor(Color.blue);
+                        }
                         g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 4, 4);
                         frame.revalidate();
                         frame.repaint();
-                  
                     }
                     while(actions==2){
                             stopButton.setEnabled(false);
@@ -214,29 +212,34 @@ public class Framework extends JPanel implements ActionListener{
                     }
                     //NEXTTTTTT
                     if(actions==3){
-                        actions=0;
-                        while((actions==0)&&(it.hasNext())){
-                            Pose p = it.next();
-                            Point2D puntoImmagine = map.convert(p);
-                            previusPoint=currentPoint;
-                        
+                        actions=3;
+                        while((actions==3)&&(it.hasNext())){
+                           Pose p = it.next();
+                        Point2D puntoImmagine = map.convert(p);
+                        previusPoint=currentPoint;
                         currentPoint=puntoImmagine;
-                        g2d.setColor(Color.BLACK);
-                        g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 5, 4);
-                        /*
-                         if(angleColor(currentPoint,previusPoint)==1){
-                            g2d.setColor(Color.red); 
+                        previusAng=angolo;
+                        angolo=angleColor(previusPoint,currentPoint);
+                        colore=angle(angolo,previusAng,colore);
+                        if(colore==1){
+                            g2d.setColor(Color.red);
                         }
-                         else if(angleColor(currentPoint,previusPoint)==2){
-                            g2d.setColor(Color.black);
-                        }else if(angleColor(currentPoint,previusPoint)==3){
+                        if(colore==2){
+                            g2d.setColor(Color.black);       
+                        }
+                        if(colore==3){
                             g2d.setColor(Color.blue);
-                        }*/
-                         
-                            g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 4, 4);
-                            frame.revalidate();
-                            frame.repaint();
-                            actions=2;
+                        }
+                        g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 4, 4);
+                        frame.revalidate();
+                        frame.repaint();
+                        actions=0;
+                        while(actions==0){
+                            try{
+                                Thread.sleep(30);
+                            }
+                            catch(InterruptedException e){}
+                        }
                         }  
                     }
                     
@@ -271,20 +274,33 @@ public class Framework extends JPanel implements ActionListener{
         if(ang<0){
             ang+=360;
         }
+        System.out.println("ang: " + ang);
         return ang;
         
-    }
-    public int angle(Double ang, Double pAng, int cl){
         
-        if((ang>pAng-5)||(ang<pAng+5)){
+    }
+    public int angle(double ang, double pAng, int cl){
+        
+        
+        if(ang==pAng){
             
             return cl;
         }
         else {
-            if(cl==1){
-                return 2;
+            if((ang<2||ang>358)||(ang>178&&ang<182)){
+               // System.out.println("1");
+                return 1;
             }
-            else return 1;
+            else{
+                if(ang>180){
+                 //   System.out.println("2");
+                    return 2;
+                }
+                else{
+                   // System.out.println("3");
+                    return 3;
+                }
+            }
         }
           
             
@@ -376,7 +392,7 @@ public class Framework extends JPanel implements ActionListener{
                 
                 log = lr.getVector();
                 
-                log = riduciLog(log, 50);
+                //log = riduciLog(log, 50);
             }
         } 
         catch (Exception ex) {
@@ -413,22 +429,14 @@ public class Framework extends JPanel implements ActionListener{
         graphFrame.setVisible(true);
         double temp_x=0,temp_y=0;
         double max=-1;
-<<<<<<< HEAD
+
         //log is a vector of <Pose
         Vector<Pose> logRidotto= riduciLog(log,7);
         System.out.println("logridotto: " +logRidotto.size());
         Graph graph = generateGraph(logRidotto, 4.);
         graph.print();
         Iterator<Pose> it = logRidotto.iterator();
-=======
-        
-        //Vector<Pose> logRidotto= riduciLog(log,7);
-        //System.out.println("logridotto: " +logRidotto.size());
-        
-         
-        Iterator<Pose> it = log.iterator();
-        
->>>>>>> master
+
         while(it.hasNext()) {
             Pose pose = it.next();
             Point2D point = map.convert(pose);
@@ -492,7 +500,7 @@ public class Framework extends JPanel implements ActionListener{
             graphFrame.repaint();
         }
         
-        Graph graph = generateGraph(log, max);
+        graph = generateGraph(log, max);
         graph.print();
         
         

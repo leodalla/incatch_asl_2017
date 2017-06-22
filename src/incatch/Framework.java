@@ -316,8 +316,8 @@ public class Framework extends JPanel implements ActionListener{
         graphFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
         graphPanel= new GraphDraw(2.5);
        
-        graphFrame.setSize((int)(mapImage.getWidth()*1.5),
-                               (int)(mapImage.getHeight()*1.5));
+        graphFrame.setSize((int)(mapImage.getWidth()*1.3),
+                               (int)(mapImage.getHeight()*1.3));
        
         JProgressBar progressBar = new JProgressBar(0, 100);
         JFrame progressFrame= new JFrame();
@@ -448,9 +448,62 @@ public class Framework extends JPanel implements ActionListener{
         return ridotto;
     }
     
-    private Graph generateGraph(Vector<Pose> poses, double max_dist){
+    private Graph generateGraph(Vector<Pose> poses, double max_dist)
+    {
+        ArrayList<Node> nodes = new ArrayList<Node>();        
         Iterator<Pose> it = poses.iterator();
-        Graph graph = new Graph();
+        int i = 0;
+        while(it.hasNext()){            
+            Pose pose = it.next();
+            Point2D point = map.convert(pose);
+            double x = point.getX();
+            double y = point.getY();
+            Node location = new Node("Node_" + i,
+                                    "Node_" + i,
+                                    nodes.size(),
+                                    point.getX(),
+                                    point.getY(),
+                                    (int)x,
+                                    (int)y);
+            nodes.add(location);
+            i++;
+        }
+        
+        ArrayList<Edge> edges = new ArrayList<Edge>();
+        
+        int j = 0;
+        for (Node n : nodes) {
+            for (Node m : nodes) {
+                double d = Graph.distanceBetweenUTM(n.getX(),
+                                                    n.getY(),
+                                                    m.getX(),
+                                                    m.getY());
+                if(d <= max_dist && d > 0) {
+                    graph.addEdge(node.getIdx(), n.getIdx());
+                    
+                    Edge e = new Edge(  "Edge_"+j,
+                                        nodes.get(n.getIdx()),
+                                        nodes.get(m.getIdx()),
+                                        d);
+                            
+                            
+                            ,nodes.get(sourceLocNo), nodes.get(destLocNo), duration );
+        edges.add(lane);
+                    
+                    
+                }
+            }
+        
+        private void addLane(String laneId, int sourceLocNo, int destLocNo,
+            int duration) {
+        Edge lane = new Edge(laneId,nodes.get(sourceLocNo), nodes.get(destLocNo), duration );
+        edges.add(lane);
+    }
+        
+        
+        
+        
+        Iterator<Pose> it = poses.iterator();
         while(it.hasNext()){
             Pose pose = it.next();
             Point2D point = map.convert(pose);
@@ -479,6 +532,10 @@ public class Framework extends JPanel implements ActionListener{
             
         }        
         return graph;
+        */
+        
+        
+        return new Graph(nodes, edges);
         
     }
 }

@@ -4,7 +4,7 @@ class Node {
     int x, y; //coordinate immagine
     double utm_x, utm_y; //coordinate UTM
     int idx; //indice del nodo
-     final private String id;
+    final private String id;
     final private String name;
 
 
@@ -20,13 +20,32 @@ class Node {
         utm_y = _utm_y;
         x = _x;
         y = _y;
-        id=null;
-        name=null;
+        id = null;
+        name = null;
     }
+    
     public Node(String id, String name) {
         this.id = id;
         this.name = name;
     }
+    
+    public Node(String _id,
+                String _name,
+                int _idx,
+                double _utm_x,
+                double _utm_y,
+                int _x,
+                int _y)
+    {
+        id = _id;
+        name = _name;
+        idx = _idx;
+        utm_x = _utm_x;
+        utm_y = _utm_y;
+        x = _x;
+        y = _y;
+    }
+    
     public String getId() {
         return id;
     }
@@ -58,12 +77,10 @@ class Node {
         } else if (!id.equals(other.id))
             return false;
         return true;
-    }
-
-    
+    }    
 
     public String toString() {
-        return "name: " + name + " utm: " + utm_x + " " +
+        return "id: " + id + " name: " + name + " utm: " + utm_x + " " +
                 utm_y;
     }
 

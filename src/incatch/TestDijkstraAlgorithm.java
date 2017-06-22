@@ -19,14 +19,12 @@ public class TestDijkstraAlgorithm {
 
    
     public void testExcute() {
-        System.out.println("1");
         nodes = new ArrayList<Node>();
         edges = new ArrayList<Edge>();
         for (int i = 0; i < 11; i++) {
             Node location = new Node("Node_" + i, "Node_" + i);
             nodes.add(location);
         }
-        System.out.println("2");
         addLane("Edge_0", 0, 1, 85);
         addLane("Edge_1", 0, 2, 217);
         addLane("Edge_2", 0, 4, 173);
@@ -39,14 +37,10 @@ public class TestDijkstraAlgorithm {
         addLane("Edge_9", 4, 9, 502);
         addLane("Edge_10", 9, 10, 40);
         addLane("Edge_11", 1, 10, 600);
-        System.out.println("3");
         // Lets check from location Loc_1 to Loc_10
         Graph graph = new Graph(nodes, edges);
-        System.out.println("4");
         DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
-        System.out.println("5");
         dijkstra.execute(nodes.get(0));
-        System.out.println("6");
         LinkedList<Node> path = dijkstra.getPath(nodes.get(10));
 
         

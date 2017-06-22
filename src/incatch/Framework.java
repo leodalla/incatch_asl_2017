@@ -169,18 +169,40 @@ public class Framework extends JPanel implements ActionListener{
             mapButton.setEnabled(false);
             
         }
-                Graphics2D g2d = mapImage.createGraphics();
-                g2d.setColor(Color.RED); 
-                Iterator<Pose> it= log.iterator();
+               
                 
+                Iterator<Pose> it= log.iterator();
+               
+                Graphics2D g2d = mapImage.createGraphics();
+                Point2D currentPoint=null;
+                Point2D previusPoint=null;
+                double previusAng=0;
+                double angolo=0;
+                int colore=0;
                 while(it.hasNext()){
+                    
                     while((actions==1)&&(it.hasNext())){
+                       
                         Pose p = it.next();
                         Point2D puntoImmagine = map.convert(p);
-                        g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 3, 3);
+                        previusPoint=currentPoint;
+                        currentPoint=puntoImmagine;
+                        previusAng=angolo;
+                        angolo=angleColor(previusPoint,currentPoint);
+                        colore=angle(angolo,previusAng,colore);
+                        if(colore==1){
+                            g2d.setColor(Color.red);
+                        }
+                        if(colore==2){
+                            g2d.setColor(Color.black);       
+                        }
+                        if(colore==3){
+                            g2d.setColor(Color.blue);
+                        }
+                        g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 4, 4);
                         frame.revalidate();
                         frame.repaint();
-                   }
+                    }
                     while(actions==2){
                             stopButton.setEnabled(false);
                             try{
@@ -188,15 +210,36 @@ public class Framework extends JPanel implements ActionListener{
                             }
                             catch(InterruptedException e){}
                     }
+                    //NEXTTTTTT
                     if(actions==3){
+                        actions=3;
+                        while((actions==3)&&(it.hasNext())){
+                           Pose p = it.next();
+                        Point2D puntoImmagine = map.convert(p);
+                        previusPoint=currentPoint;
+                        currentPoint=puntoImmagine;
+                        previusAng=angolo;
+                        angolo=angleColor(previusPoint,currentPoint);
+                        colore=angle(angolo,previusAng,colore);
+                        if(colore==1){
+                            g2d.setColor(Color.red);
+                        }
+                        if(colore==2){
+                            g2d.setColor(Color.black);       
+                        }
+                        if(colore==3){
+                            g2d.setColor(Color.blue);
+                        }
+                        g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 4, 4);
+                        frame.revalidate();
+                        frame.repaint();
                         actions=0;
-                        while((actions==0)&&(it.hasNext())){
-                            Pose p = it.next();
-                            Point2D puntoImmagine = map.convert(p);
-                            g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 3, 3);
-                            frame.revalidate();
-                            frame.repaint();
-                            actions=2;
+                        while(actions==0){
+                            try{
+                                Thread.sleep(30);
+                            }
+                            catch(InterruptedException e){}
+                        }
                         }  
                     }
                     
@@ -209,9 +252,59 @@ public class Framework extends JPanel implements ActionListener{
                     
                 }
                 else {
-                   JOptionPane.showMessageDialog(null, "OTTIMA SCELTA");
+                   //JOptionPane.showMessageDialog(null, "OTTIMA SCELTA");
                 }
-        return 0;
+        
+                
+                return 0;
+        }
+    
+    public double angleColor(Point2D b,Point2D a){
+        //1 dritto rosso
+        //2 destra verde
+        //3 sinistra blu
+        if(a==null||b==null){
+            return 1;
+        }
+        double ax=a.getX();
+        double ay=a.getY();
+        double bx=b.getX();
+        double by=b.getY();
+        double ang=Math.tan(ax-bx/ay-by);
+        if(ang<0){
+            ang+=360;
+        }
+        System.out.println("ang: " + ang);
+        return ang;
+        
+        
+    }
+    public int angle(double ang, double pAng, int cl){
+        
+        
+        if(ang==pAng){
+            
+            return cl;
+        }
+        else {
+            if((ang<2||ang>358)||(ang>178&&ang<182)){
+               // System.out.println("1");
+                return 1;
+            }
+            else{
+                if(ang>180){
+                 //   System.out.println("2");
+                    return 2;
+                }
+                else{
+                   // System.out.println("3");
+                    return 3;
+                }
+            }
+        }
+          
+            
+          
     }
     
     public void actionPerformed(ActionEvent e) {
@@ -298,7 +391,7 @@ public class Framework extends JPanel implements ActionListener{
                 System.out.println("[OK]");
                 
                 log = lr.getVector();
-                
+
                 log = riduciLog(log, 10);
             }
         } 
@@ -328,24 +421,22 @@ public class Framework extends JPanel implements ActionListener{
         graphFrame.getContentPane().add(playButton,BorderLayout.NORTH);
         graphFrame.getContentPane().add(panel,BorderLayout.NORTH);
         graphFrame.getContentPane().add(graphPanel,BorderLayout.CENTER);
- 
         //panel.add(progressBar);
         progressFrame.getContentPane().add(panel,BorderLayout.NORTH);
         progressFrame.setSize(300, 300);
         progressFrame.setVisible(false);
         progressFrame.repaint();
         graphFrame.setVisible(true);
-        
         double temp_x=0,temp_y=0;
-        
         double max=-1;
-        
-        //Vector<Pose> logRidotto= riduciLog(log,7);
-        //System.out.println("logridotto: " +logRidotto.size());
-        
-         
-        Iterator<Pose> it = log.iterator();
-        
+
+        //log is a vector of <Pose
+        Vector<Pose> logRidotto= riduciLog(log,7);
+        System.out.println("logridotto: " +logRidotto.size());
+        Graph graph = generateGraph(logRidotto, 4.);
+        graph.print();
+        Iterator<Pose> it = logRidotto.iterator();
+
         while(it.hasNext()) {
             Pose pose = it.next();
             Point2D point = map.convert(pose);
@@ -355,20 +446,15 @@ public class Framework extends JPanel implements ActionListener{
                         //System.out.println("cont: "+ cont);
                         progressBar.setValue(cont);
                         progressBar.setVisible(false);
-                        
-                       
             ArrayList<Node> nodes = graphPanel.getNodes();
-            
             Node n = new Node(nodes.size(),
-                        point.getX(),
-                        point.getY(),
-                        (int)x,
-                        (int)y);
-            
-            temp_x=point.getX();
-            temp_y=point.getY();
-            Pose oldpose=null;
-            
+                point.getX(),
+                point.getY(),
+                (int)x,
+                (int)y);
+                temp_x=point.getX();
+                temp_y=point.getY();
+                Pose oldpose=null;
             for(int i=0;i<log.size();i++)
             {
                 
@@ -383,7 +469,6 @@ public class Framework extends JPanel implements ActionListener{
                     Point2D p2 = map.convert(oldpose);
                     double d = Math.sqrt(Math.pow(p1.getX() - p2.getX(), 2) +
                          Math.pow(p1.getY() - p2.getY(), 2));
-                    
                     //System.out.println("d: "+ d);
                     if(max<d)
                     {
@@ -391,19 +476,11 @@ public class Framework extends JPanel implements ActionListener{
                         //System.out.println("max: "+ max);
                     }
                     oldpose=p;
-                }
-                
-                
+                }    
             }
-            
-            
             for (Node node : nodes) {
-                
-                
                // System.out.println(node.toString());
                 double d = GraphDraw.distanceBetweenUTM( x, y, node.getX(), node.getY());
-                       
-                
                 //System.out.println("d: "+ d);
                 if(d <= max && d >= 0) {
                     graphPanel.addEdge(node.getIdx(), n.getIdx());
@@ -423,7 +500,7 @@ public class Framework extends JPanel implements ActionListener{
             graphFrame.repaint();
         }
         
-        Graph graph = generateGraph(log, max);
+        graph = generateGraph(log, max);
         graph.print();
         
         DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);

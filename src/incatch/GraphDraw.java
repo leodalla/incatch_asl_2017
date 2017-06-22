@@ -11,6 +11,8 @@ public class GraphDraw extends JPanel {
 
     ArrayList<Node> nodes;
     ArrayList<Edge> edges;
+    
+    double SCALE;
 
     public GraphDraw() { //Constructor
         
@@ -19,6 +21,17 @@ public class GraphDraw extends JPanel {
 	edges = new ArrayList<Edge>();
 	width = 30;
 	height = 30;
+        SCALE = 20.;
+    }
+    
+    public GraphDraw(double scale) { //Constructor
+        
+        
+	nodes = new ArrayList<Node>();
+	edges = new ArrayList<Edge>();
+	width = 30;
+	height = 30;
+        SCALE = scale;
     }
     
     public void addNode(double utm_x, double utm_y,
@@ -48,15 +61,14 @@ public class GraphDraw extends JPanel {
     
     public void paint(Graphics g) { // draw the nodes and edges
 	
-        double OFFSET = 20;
-        
+               
 	g.setColor(Color.red);
 	for (Edge e : edges) {
             
-            int xi = (int)(nodes.get(e.getI()).x*OFFSET);
-            int yi = (int)(nodes.get(e.getI()).y*OFFSET);
-            int xj = (int)(nodes.get(e.getJ()).x*OFFSET);
-            int yj = (int)(nodes.get(e.getJ()).y*OFFSET);
+            int xi = (int)(nodes.get(e.getI()).x*SCALE);
+            int yi = (int)(nodes.get(e.getI()).y*SCALE);
+            int xj = (int)(nodes.get(e.getJ()).x*SCALE);
+            int yj = (int)(nodes.get(e.getJ()).y*SCALE);
             
             
            
@@ -73,12 +85,12 @@ public class GraphDraw extends JPanel {
             int yip = yi;
                     //(int)(Math.sin(theta) * xi + Math.cos(theta) * yi);
             
-            xip -= 8000;
-            yip -= 6700;
+            xip -= 500;
+            yip -= 300;
             
             
-            //System.out.println("xip: " + xip);
-            //System.out.println("yip: " + yip);
+            System.out.println("xip: " + xip);
+            System.out.println("yip: " + yip);
             
             
             int xjp = xj;
@@ -86,8 +98,8 @@ public class GraphDraw extends JPanel {
             int yjp = yj;
                     //(int)(Math.sin(theta) * xj + Math.cos(theta) * yj);
             
-            xjp -= 8000;
-            yjp -= 6700;
+            xjp -= 500;
+            yjp -= 300;
             
             
             //System.out.println("xjp: " + xjp);
@@ -101,8 +113,8 @@ public class GraphDraw extends JPanel {
 	    
             
             
-            int x = (int)(n.x*OFFSET);
-            int y = (int)(n.y*OFFSET);
+            int x = (int)(n.x*SCALE);
+            int y = (int)(n.y*SCALE);
             
             //double theta = Math.PI/2;    
         
@@ -111,8 +123,8 @@ public class GraphDraw extends JPanel {
             int yp = y;
                     //(int)(Math.sin(theta) * x + Math.cos(theta) * y);
             
-            xp -= 8000;
-            yp -= 6700;
+            xp -= 500;
+            yp -= 300;
             
             g.fillOval(xp, yp, 6, 6);
 	    

@@ -364,19 +364,23 @@ public class Framework extends JPanel implements ActionListener{
                 LogReader lr= new LogReader(currentLogFile);
                 
                 if(lr.read()){
-                   
+                   System.out.print("Reading log...");
+                   System.out.flush();
                 }
-                else{
-                   System.out.println("Errore chiudo"); 
+                else {
+                   System.out.println("Error in reading log"); 
                    return;
-
                 }
+                
+                System.out.println("[OK]");
+                
                 log = lr.getVector();
-               
+                
+                log = riduciLog(log, 50);
             }
-             } 
+        } 
         catch (Exception ex) {
-             }
+        }
     }
     
     public void createGraph() {
@@ -387,10 +391,10 @@ public class Framework extends JPanel implements ActionListener{
         graphFrame = new JFrame("Grafo");
                 
         graphFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
-        graphPanel= new GraphDraw();
+        graphPanel= new GraphDraw(2.5);
        
-        graphFrame.setSize((int)(mapImage.getWidth()),
-                               (int)(mapImage.getHeight()));
+        graphFrame.setSize((int)(mapImage.getWidth()*1.5),
+                               (int)(mapImage.getHeight()*1.5));
        
         JProgressBar progressBar = new JProgressBar(0, 100);
         JFrame progressFrame= new JFrame();
@@ -409,12 +413,22 @@ public class Framework extends JPanel implements ActionListener{
         graphFrame.setVisible(true);
         double temp_x=0,temp_y=0;
         double max=-1;
+<<<<<<< HEAD
         //log is a vector of <Pose
         Vector<Pose> logRidotto= riduciLog(log,7);
         System.out.println("logridotto: " +logRidotto.size());
         Graph graph = generateGraph(logRidotto, 4.);
         graph.print();
         Iterator<Pose> it = logRidotto.iterator();
+=======
+        
+        //Vector<Pose> logRidotto= riduciLog(log,7);
+        //System.out.println("logridotto: " +logRidotto.size());
+        
+         
+        Iterator<Pose> it = log.iterator();
+        
+>>>>>>> master
         while(it.hasNext()) {
             Pose pose = it.next();
             Point2D point = map.convert(pose);
@@ -477,6 +491,9 @@ public class Framework extends JPanel implements ActionListener{
             graphFrame.revalidate();
             graphFrame.repaint();
         }
+        
+        Graph graph = generateGraph(log, max);
+        graph.print();
         
         
     }

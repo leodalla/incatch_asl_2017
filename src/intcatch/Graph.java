@@ -1,4 +1,4 @@
-package incatch;
+package intcatch;
 
 import java.util.*;
 import java.awt.*;

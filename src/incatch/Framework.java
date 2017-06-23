@@ -41,7 +41,7 @@ public class Framework extends JPanel implements ActionListener{
     //1 play
     //2 stop
     //3 next
-    private int actions, a;
+    private int actions, initialPoint,finishPoint;
     private Vector<Pose> log;
     private Map map;
     
@@ -341,8 +341,11 @@ public class Framework extends JPanel implements ActionListener{
             logButton.setEnabled(false);
         }
         else if(command.equals("graph")){
-            a=valore();
-            createGraph();
+            Graph graph=  createGraph();
+           
+            initialPoint=valore("initial point");
+            finishPoint=valore("final point");
+            runDijkstra(graph);
         }
         else if(command.equals("rico")){
             rico();
@@ -401,9 +404,9 @@ public class Framework extends JPanel implements ActionListener{
         }
     }
     
-    public void createGraph() {
+    public Graph createGraph() {
         int cont=0;
-        //a=valore();
+       
         //progressPanel =new JPanel(new FlowLayout(FlowLayout.LEFT));
         
         graphFrame = new JFrame("Grafo");
@@ -497,11 +500,15 @@ public class Framework extends JPanel implements ActionListener{
         
         Graph graph = generateGraph(log, max);
         graph.print();
+        return graph;
         
+    }
+    
+    private void runDijkstra(Graph graph){
         DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
         ArrayList<Node> nodes = graph.getNodes();
-        dijkstra.execute(nodes.get(0));
-        LinkedList<Node> path = dijkstra.getPath(nodes.get(a));
+        dijkstra.execute(nodes.get(initialPoint));
+        LinkedList<Node> path = dijkstra.getPath(nodes.get(finishPoint));
         System.out.println("Shortest Path:");
         for (Node n : path) {
             System.out.println(n.toString());
@@ -573,13 +580,13 @@ public class Framework extends JPanel implements ActionListener{
         
     }
     
-    public int valore(){
-        Object[] possibilities = {"1", "10", "20"};
+    public int valore(String input){
+        Object[] possibilities = {"1","2","3","4","5","6","7","8","9", "10","11","12","13","14","15","16","17","18","19", "20"};
         String s = (String)JOptionPane.showInputDialog(
                     frame,
-                    "Complete the sentence:\n"
-                    + "\"Green eggs and...\"",
-                    "Customized Dialog",
+                    "Choose a number: \n it's for DijkstraAlgorithm.."
+                    + input,
+                    "   ",
                     JOptionPane.PLAIN_MESSAGE,
                     null,
                     possibilities,

@@ -20,7 +20,7 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with Intcatch ASL giugno 2017.  If not, see <http://www.gnu.org/licenses/>.
  *
- *  This file contains the C++ OpenCV based implementation for
+ *  This file contains the Java based implementation for
  *  Intcatch ASL giugno 2017 algorithm described in
  *  
  *  Domenico D. Bloisi, Carlo Bottaro and Leonardo Dalla Riva

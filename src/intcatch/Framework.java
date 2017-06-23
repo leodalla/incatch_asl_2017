@@ -20,7 +20,7 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with Intcatch ASL giugno 2017.  If not, see <http://www.gnu.org/licenses/>.
  *
- *  This file contains the C++ OpenCV based implementation for
+ *  This file contains the Java based implementation for
  *  Intcatch ASL giugno 2017 algorithm described in
  *  
  *  Domenico D. Bloisi, Carlo Bottaro and Leonardo Dalla Riva
@@ -58,6 +58,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JProgressBar;
+import javax.swing.BorderFactory;
 
 public class Framework extends JPanel implements ActionListener{
     //Variabile d'istanza
@@ -145,6 +146,7 @@ public class Framework extends JPanel implements ActionListener{
         riconoscimentiButton.addActionListener(this);
         buttonPanel.add(riconoscimentiButton);
         //altro
+        buttonPanel.setBorder(BorderFactory.createLineBorder(Color.black));
         frame.getContentPane().add(buttonPanel,BorderLayout.NORTH);
         frame.setVisible(true);
         frame.repaint();  
@@ -450,7 +452,7 @@ public class Framework extends JPanel implements ActionListener{
                 
                 log = lr.getVector();
 
-                log = riduciLog(log, 30);
+                //log = riduciLog(log, 30);
                 
             }
         } 
@@ -569,7 +571,7 @@ public class Framework extends JPanel implements ActionListener{
         }        
     }
     
-    private Vector<Pose> riduciLog(Vector<Pose> log, int new_size){
+    /*private Vector<Pose> riduciLog(Vector<Pose> log, int new_size){
         Vector<Pose> ridotto=new Vector<Pose>();
         Iterator<Pose> it = log.iterator();
          
@@ -587,6 +589,7 @@ public class Framework extends JPanel implements ActionListener{
         }        
         return ridotto;
     }
+*/
     
     private Graph generateGraph(Vector<Pose> poses, double max_dist)
     {

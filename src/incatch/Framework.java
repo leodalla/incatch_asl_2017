@@ -199,7 +199,21 @@ public class Framework extends JPanel implements ActionListener{
                         if(colore==3){
                             g2d.setColor(Color.blue);
                         }
-                        g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 4, 4);
+                        
+                        int punto_x = (int)(puntoImmagine.getX());
+                        int punto_y = (int)(puntoImmagine.getY());
+                        
+                        /*
+                        cambiare
+                        
+                        punto_x += 13700;
+                        punto_x *= 3;
+                        punto_y += 41200;
+                        punto_y *= 3;
+                        */
+                        
+                        g2d.fillOval(punto_x, punto_y, 4, 4);
+                        System.out.println("punto immagine  "  + punto_x + " " + punto_y);
                         frame.revalidate();
                         frame.repaint();
                     }
@@ -382,7 +396,7 @@ public class Framework extends JPanel implements ActionListener{
             if (n == JFileChooser.APPROVE_OPTION) {
                 File f = fileChooser.getSelectedFile();
                 currentLogFile = new String(f.toString());
-                LogReader lr= new LogReader(currentLogFile);
+                LogReader lr = new LogReader(currentLogFile);
                 
                 if(lr.read()){
                    System.out.print("Reading log...");
@@ -398,6 +412,7 @@ public class Framework extends JPanel implements ActionListener{
                 log = lr.getVector();
 
                 log = riduciLog(log, 30);
+                
             }
         } 
         catch (Exception ex) {
@@ -412,7 +427,7 @@ public class Framework extends JPanel implements ActionListener{
         graphFrame = new JFrame("Grafo");
                 
         graphFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
-        graphPanel= new GraphDraw(2.5);
+        graphPanel= new GraphDraw(2);
        
         graphFrame.setSize((int)(mapImage.getWidth()*1.3),
                                (int)(mapImage.getHeight()*1.3));
@@ -509,7 +524,7 @@ public class Framework extends JPanel implements ActionListener{
         ArrayList<Node> nodes = graph.getNodes();
         dijkstra.execute(nodes.get(initialPoint));
         LinkedList<Node> path = dijkstra.getPath(nodes.get(finishPoint));
-        System.out.println("Shortest Path:");
+        System.out.println("getpathortest Path:");
         for (Node n : path) {
             System.out.println(n.toString());
         }        
@@ -551,6 +566,10 @@ public class Framework extends JPanel implements ActionListener{
                                     point.getY(),
                                     (int)x,
                                     (int)y);
+            
+            
+            System.out.println("Nodo " + i + " UTM " + pose.getP());
+            
             nodes.add(location);
             i++;
         }
@@ -581,7 +600,7 @@ public class Framework extends JPanel implements ActionListener{
     }
     
     public int valore(String input){
-        Object[] possibilities = {"1","2","3","4","5","6","7","8","9", "10","11","12","13","14","15","16","17","18","19", "20"};
+        Object[] possibilities = {"1","2","3","4","5","6","7","8","9", "10","11","12","13","14","15","16","17","18","19", "20","26"};
         String s = (String)JOptionPane.showInputDialog(
                     frame,
                     "Choose a number: \n it's for DijkstraAlgorithm.."

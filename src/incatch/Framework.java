@@ -32,9 +32,8 @@ public class Framework extends JPanel implements ActionListener{
                     mapButton,
                     logButton,
                     graphButton,
-                    riconoscimentiButton,
-                    chooseButton;
-    private JPanel buttonPanel,progressPanel;
+                    riconoscimentiButton;
+    private JPanel buttonPanel;
     private String currentLogFile;
     private String mapname;
     //actions
@@ -42,7 +41,7 @@ public class Framework extends JPanel implements ActionListener{
     //1 play
     //2 stop
     //3 next
-    private int actions;
+    private int actions, a;
     private Vector<Pose> log;
     private Map map;
     
@@ -106,12 +105,6 @@ public class Framework extends JPanel implements ActionListener{
         riconoscimentiButton.setActionCommand("rico");
         riconoscimentiButton.addActionListener(this);
         buttonPanel.add(riconoscimentiButton);
-        //chooseButton
-        
-        chooseButton = new JButton(graphButtonIcon);
-        chooseButton.setActionCommand("graph");
-        chooseButton.addActionListener(this);
-        buttonPanel.add(chooseButton);
         //altro
         frame.getContentPane().add(buttonPanel,BorderLayout.NORTH);
         frame.setVisible(true);
@@ -348,11 +341,13 @@ public class Framework extends JPanel implements ActionListener{
             logButton.setEnabled(false);
         }
         else if(command.equals("graph")){
+            a=valore();
             createGraph();
         }
         else if(command.equals("rico")){
             rico();
         }
+         
     }
  
     public void mapChooser() {
@@ -408,7 +403,7 @@ public class Framework extends JPanel implements ActionListener{
     
     public void createGraph() {
         int cont=0;
-        
+        //a=valore();
         //progressPanel =new JPanel(new FlowLayout(FlowLayout.LEFT));
         
         graphFrame = new JFrame("Grafo");
@@ -425,7 +420,6 @@ public class Framework extends JPanel implements ActionListener{
         progressBar.setStringPainted(true);
         JPanel panel = new JPanel();
         panel.add(progressBar);
-        graphFrame.getContentPane().add(chooseButton,BorderLayout.NORTH);
         graphFrame.getContentPane().add(panel,BorderLayout.NORTH);
         graphFrame.getContentPane().add(graphPanel,BorderLayout.CENTER);
         //panel.add(progressBar);
@@ -507,7 +501,7 @@ public class Framework extends JPanel implements ActionListener{
         DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
         ArrayList<Node> nodes = graph.getNodes();
         dijkstra.execute(nodes.get(0));
-        LinkedList<Node> path = dijkstra.getPath(nodes.get(29));
+        LinkedList<Node> path = dijkstra.getPath(nodes.get(a));
         System.out.println("Shortest Path:");
         for (Node n : path) {
             System.out.println(n.toString());
@@ -577,6 +571,22 @@ public class Framework extends JPanel implements ActionListener{
                
         return new Graph(nodes, edges);
         
+    }
+    
+    public int valore(){
+        Object[] possibilities = {"1", "10", "20"};
+        String s = (String)JOptionPane.showInputDialog(
+                    frame,
+                    "Complete the sentence:\n"
+                    + "\"Green eggs and...\"",
+                    "Customized Dialog",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    possibilities,
+                    "10");
+        int b = Integer.parseInt(s);
+
+        return b;
     }
 }
 

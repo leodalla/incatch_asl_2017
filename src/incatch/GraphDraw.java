@@ -129,8 +129,8 @@ public class GraphDraw extends JPanel {
             
             String m=null;
             m= String.valueOf(a).toString();
-            g.fillOval(xp, yp, 6, 6);
-            g.setFont(new Font("Arial", Font.PLAIN, 18)); 
+            g.fillOval(xp, yp, 4, 4);
+            g.setFont(new Font("Futura", Font.PLAIN, 16)); 
 	    g.drawString(m , xp+8, yp+8);
             a++;
 	}

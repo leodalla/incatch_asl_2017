@@ -58,14 +58,14 @@ public class Map extends JPanel {
         int width = mapImage.getWidth ();
         int height = mapImage.getHeight ();
         double t_x=t.getX();
-        //System.out.println("tx: "+t_x);
+        System.out.println("tx: "+t_x);
         double ul_x=ul.getX();
         //System.out.println("ulX: "+ul_x);
         double br_x=br.getX();
         //System.out.println("brX: "+br_x);
         double x = ((t_x-ul_x)*width)/(br_x-ul_x);
         double t_y=t.getY();
-        //System.out.println("ty: "+t_y);
+        System.out.println("ty: "+t_y);
         double ul_y=ul.getY();
         double br_y=br.getY();
         double y=((t_y-ul_y)*height)/(br_y-ul_y);
@@ -76,6 +76,7 @@ public class Map extends JPanel {
             //System.out.println("puntoX: "+z.getX());
             //System.out.println("puntoY: "+z.getY());
         }
+        
         return z;
     }
 }

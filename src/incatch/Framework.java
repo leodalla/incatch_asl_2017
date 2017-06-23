@@ -32,9 +32,8 @@ public class Framework extends JPanel implements ActionListener{
                     mapButton,
                     logButton,
                     graphButton,
-                    riconoscimentiButton,
-                    chooseButton;
-    private JPanel buttonPanel,progressPanel;
+                    riconoscimentiButton;
+    private JPanel buttonPanel;
     private String currentLogFile;
     private String mapname;
     //actions
@@ -42,7 +41,7 @@ public class Framework extends JPanel implements ActionListener{
     //1 play
     //2 stop
     //3 next
-    private int actions;
+    private int actions, initialPoint,finishPoint;
     private Vector<Pose> log;
     private Map map;
     
@@ -106,12 +105,6 @@ public class Framework extends JPanel implements ActionListener{
         riconoscimentiButton.setActionCommand("rico");
         riconoscimentiButton.addActionListener(this);
         buttonPanel.add(riconoscimentiButton);
-        //chooseButton
-        
-        chooseButton = new JButton(graphButtonIcon);
-        chooseButton.setActionCommand("graph");
-        chooseButton.addActionListener(this);
-        buttonPanel.add(chooseButton);
         //altro
         frame.getContentPane().add(buttonPanel,BorderLayout.NORTH);
         frame.setVisible(true);
@@ -206,7 +199,21 @@ public class Framework extends JPanel implements ActionListener{
                         if(colore==3){
                             g2d.setColor(Color.blue);
                         }
-                        g2d.fillOval((int)(puntoImmagine.getX()), (int)(puntoImmagine.getY()), 4, 4);
+                        
+                        int punto_x = (int)(puntoImmagine.getX());
+                        int punto_y = (int)(puntoImmagine.getY());
+                        
+                        /*
+                        cambiare
+                        
+                        punto_x += 13700;
+                        punto_x *= 3;
+                        punto_y += 41200;
+                        punto_y *= 3;
+                        */
+                        
+                        g2d.fillOval(punto_x, punto_y, 4, 4);
+                        System.out.println("punto immagine  "  + punto_x + " " + punto_y);
                         frame.revalidate();
                         frame.repaint();
                     }
@@ -348,11 +355,16 @@ public class Framework extends JPanel implements ActionListener{
             logButton.setEnabled(false);
         }
         else if(command.equals("graph")){
-            createGraph();
+            Graph graph=  createGraph();
+           
+            initialPoint=valore("initial point");
+            finishPoint=valore("final point");
+            runDijkstra(graph);
         }
         else if(command.equals("rico")){
             rico();
         }
+         
     }
  
     public void mapChooser() {
@@ -384,7 +396,7 @@ public class Framework extends JPanel implements ActionListener{
             if (n == JFileChooser.APPROVE_OPTION) {
                 File f = fileChooser.getSelectedFile();
                 currentLogFile = new String(f.toString());
-                LogReader lr= new LogReader(currentLogFile);
+                LogReader lr = new LogReader(currentLogFile);
                 
                 if(lr.read()){
                    System.out.print("Reading log...");
@@ -400,21 +412,22 @@ public class Framework extends JPanel implements ActionListener{
                 log = lr.getVector();
 
                 log = riduciLog(log, 30);
+                
             }
         } 
         catch (Exception ex) {
         }
     }
     
-    public void createGraph() {
+    public Graph createGraph() {
         int cont=0;
-        
+       
         //progressPanel =new JPanel(new FlowLayout(FlowLayout.LEFT));
         
         graphFrame = new JFrame("Grafo");
                 
         graphFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
-        graphPanel= new GraphDraw(2.5);
+        graphPanel= new GraphDraw(2);
        
         graphFrame.setSize((int)(mapImage.getWidth()*1.3),
                                (int)(mapImage.getHeight()*1.3));
@@ -425,7 +438,6 @@ public class Framework extends JPanel implements ActionListener{
         progressBar.setStringPainted(true);
         JPanel panel = new JPanel();
         panel.add(progressBar);
-        graphFrame.getContentPane().add(chooseButton,BorderLayout.NORTH);
         graphFrame.getContentPane().add(panel,BorderLayout.NORTH);
         graphFrame.getContentPane().add(graphPanel,BorderLayout.CENTER);
         //panel.add(progressBar);
@@ -503,12 +515,16 @@ public class Framework extends JPanel implements ActionListener{
         
         Graph graph = generateGraph(log, max);
         graph.print();
+        return graph;
         
+    }
+    
+    private void runDijkstra(Graph graph){
         DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
         ArrayList<Node> nodes = graph.getNodes();
-        dijkstra.execute(nodes.get(0));
-        LinkedList<Node> path = dijkstra.getPath(nodes.get(29));
-        System.out.println("Shortest Path:");
+        dijkstra.execute(nodes.get(initialPoint));
+        LinkedList<Node> path = dijkstra.getPath(nodes.get(finishPoint));
+        System.out.println("getpathortest Path:");
         for (Node n : path) {
             System.out.println(n.toString());
         }        
@@ -550,6 +566,10 @@ public class Framework extends JPanel implements ActionListener{
                                     point.getY(),
                                     (int)x,
                                     (int)y);
+            
+            
+            System.out.println("Nodo " + i + " UTM " + pose.getP());
+            
             nodes.add(location);
             i++;
         }
@@ -577,6 +597,22 @@ public class Framework extends JPanel implements ActionListener{
                
         return new Graph(nodes, edges);
         
+    }
+    
+    public int valore(String input){
+        Object[] possibilities = {"1","2","3","4","5","6","7","8","9", "10","11","12","13","14","15","16","17","18","19", "20","26"};
+        String s = (String)JOptionPane.showInputDialog(
+                    frame,
+                    "Choose a number: \n it's for DijkstraAlgorithm.."
+                    + input,
+                    "   ",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    possibilities,
+                    "10");
+        int b = Integer.parseInt(s);
+
+        return b;
     }
 }
 
